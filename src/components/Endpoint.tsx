@@ -1,5 +1,6 @@
 import * as React from "react";
-import dispatcher from "../dispatcher";
+import moveEndpoint from "../actions/moveEndpoint";
+import setMouseMove from "../actions/setMouseMove";
 
 interface EndpointProps {
     type?: 'none' | 'circle' | 'square' | 'arrow';
@@ -17,12 +18,16 @@ export default function Endpoint({type, x, y, angle = 0, size = 6, lineId, lineE
         const offsetY = y - ev.pageY;
 
         const onMouseMove = (ev: React.MouseEvent) => {
-            const dparameters = { lineId, lineEnd, newX: ev.pageX + offsetX, newY: ev.pageY + offsetY };
-            dispatcher.dispatch("endpoint-move", dparameters);
+            moveEndpoint(false, lineId, lineEnd, ev.pageX + offsetX, ev.pageY + offsetY);
         };
 
-        dispatcher.dispatch("mousemove-set", { func: onMouseMove });
+        setMouseMove(onMouseMove);
+
+        // don't trigger on container
         ev.stopPropagation();
+
+        // prevent text selection
+        ev.preventDefault();
     };
 
     const endpointProps = {

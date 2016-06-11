@@ -1,8 +1,10 @@
 import * as React from "react";
-import dispatcher from "../dispatcher";
 import Bezier from "./Bezier";
 import Endpoint from "./Endpoint";
 import Straight from "./Straight";
+import addLine from "../actions/addLine";
+import moveEndpoint from "../actions/moveEndpoint";
+import setMouseMove from "../actions/setMouseMove";
 
 const rad2deg = 180 / Math.PI;
 
@@ -26,16 +28,19 @@ export default function Container({lines}: ContainerProps) {
                 if (starting) {
                     const distTrigger = 20;
                     if (Math.abs(x2 - x1) > distTrigger || Math.abs(y2 - y1) > distTrigger) {
-                        dispatcher.dispatch("line-add", { x1, y1, x2, y2 });
+                        addLine(x1, y1, x2, y2);
                         starting = false;
                     }
                 } else {
-                    dispatcher.dispatch("endpoint-move", { last: true, lineEnd: 2, newX: x2, newY: y2});
+                    moveEndpoint(true, 0, 2, x2, y2);
                 }
             };
 
-            dispatcher.dispatch("mousemove-set", { func: onMouseMove });
+            setMouseMove(onMouseMove);
         }
+
+        // prevent text selection
+        ev.preventDefault();
     };
 
     const lineEls: JSX.Element[] = [];
