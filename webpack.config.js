@@ -30,6 +30,11 @@ module.exports = {
         ]
     },
 
+    externals: {
+        "react": "React", 
+        "react-dom": "ReactDOM"
+    },
+
     debug: true,
     watch: true
 };
