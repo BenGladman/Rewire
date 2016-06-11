@@ -1,0 +1,20 @@
+.pb-svg {
+    background: hsl(230,30%,98%);
+    height: 100%;
+    width: 100%;
+}
+
+.pb-endpoint {
+    fill: hsl(230,30%,70%);
+    stroke: hsl(230,30%,20%);
+    stroke-width: 3;
+}
+
+.pb-endpoint:hover {
+    fill: hsl(230,30%,80%);
+}
+
+.pb-line {
+    stroke: hsl(230,30%,20%);
+    stroke-width: 3;
+}
