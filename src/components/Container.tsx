@@ -32,7 +32,7 @@ export default function Container({lines}: ContainerProps) {
                         starting = false;
                     }
                 } else {
-                    moveEndpoint(true, 0, 2, x2, y2);
+                    moveEndpoint(true, 0, { x2, y2 });
                 }
             };
 

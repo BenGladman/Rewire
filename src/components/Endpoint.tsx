@@ -18,7 +18,12 @@ export default function Endpoint({type, x, y, angle = 0, size = 6, lineId, lineE
         const offsetY = y - ev.pageY;
 
         const onMouseMove = (ev: React.MouseEvent) => {
-            moveEndpoint(false, lineId, lineEnd, ev.pageX + offsetX, ev.pageY + offsetY);
+            const lineProps = {
+                ["x" + lineEnd]: ev.pageX + offsetX,
+                ["y" + lineEnd]: ev.pageY + offsetY
+            };
+
+            moveEndpoint(false, lineId, lineProps);
         };
 
         setMouseMove(onMouseMove);
