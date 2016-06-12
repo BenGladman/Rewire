@@ -1,5 +1,13 @@
-import { setState } from "../store";
+import { getState, setState } from "../store";
 
 export default function () {
-    setState({lines: []});
+    const { boxes, lines } = getState();
+
+    boxes.clear();
+    lines.length = 0;
+
+    setState({
+        boxes,
+        lines
+    });
 }

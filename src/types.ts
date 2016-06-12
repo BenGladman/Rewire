@@ -1,5 +1,15 @@
 import * as React from "react";
 
+export interface BoxDefinition {
+    id: string;
+    title?: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    content: JSX.Element;
+}
+
 export type EndpointType = "none" | "circle" | "square" | "arrow";
 
 export interface LineDefinition {
@@ -14,6 +24,7 @@ export interface LineDefinition {
 }
 
 export interface State {
+    boxes?: Set<BoxDefinition>;
     lines?: LineDefinition[];
     onMouseMove?: (ev: React.MouseEvent) => void;
 }

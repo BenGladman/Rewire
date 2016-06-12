@@ -1,6 +1,41 @@
-.pb-svg {
+.pb-app {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pb-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.pb-boxcontainer {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.pb-box {
+    background: hsl(230,30%,99%);
+    border: 1px solid hsl(230,30%,20%);
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.pb-boxheader {
+    background: hsl(230,30%,20%);
+    color: hsl(230,30%,98%);
+    font-size: 0.6rem;
+    font-weight: normal;
+    margin: 0;
+    padding: 2px 0;
+    text-align: center;
+}
+
+.pb-linecontainer {
     background: hsl(230,30%,98%);
     height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
     width: 100%;
 }
 

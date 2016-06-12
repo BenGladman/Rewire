@@ -1,20 +1,26 @@
 import * as React from "react";
 import * as Types from "../types";
 import { initialiseStore } from "../store";
-import Container from "./Container";
+import BoxContainer from "./BoxContainer";
+import LineContainer from "./LineContainer";
 import clearAll from "../actions/clearAll";
 
 interface ReplumbProps {
     heading: string;
     height: number;
     width: number;
+    initialBoxes: Types.BoxDefinition[];
     initialLines: Types.LineDefinition[];
 }
 
 export default class Replumb extends React.Component<ReplumbProps, Types.State> {
     constructor(props: ReplumbProps) {
         super(props);
-        this.state = { lines: props.initialLines };
+
+        this.state = {
+            boxes: new Set(props.initialBoxes),
+            lines: props.initialLines
+        };
 
         initialiseStore(
             () => this.state,
@@ -26,8 +32,11 @@ export default class Replumb extends React.Component<ReplumbProps, Types.State> 
         return (
             <div className="pb-app">
                 <h1>{this.props.heading}</h1>
-                <div style={{ height: this.props.height, width: this.props.width }} onMouseMove={this.state.onMouseMove}>
-                    <Container lines={this.state.lines} />
+                <div className="pb-container"
+                    style={{ height: this.props.height, width: this.props.width }}
+                    onMouseMove={this.state.onMouseMove}>
+                    <LineContainer lines={this.state.lines} />
+                    <BoxContainer boxes={this.state.boxes} />
                 </div>
                 <button onClick={clearAll}>Clear All</button>
             </div>

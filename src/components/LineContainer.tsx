@@ -9,11 +9,11 @@ import setMouseMove from "../actions/setMouseMove";
 
 const rad2deg = 180 / Math.PI;
 
-interface ContainerProps {
+interface LineContainerProps {
     lines: Types.LineDefinition[];
 }
 
-export default function Container({lines}: ContainerProps) {
+export default function LineContainer({lines}: LineContainerProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -74,7 +74,7 @@ export default function Container({lines}: ContainerProps) {
 
 
     return (
-        <svg className="pb-svg"
+        <svg className="pb-linecontainer"
             onMouseDown={onMouseDown}>
             {lineEls}
             {endpointEls}
