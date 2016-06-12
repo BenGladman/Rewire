@@ -15,6 +15,7 @@
 }
 
 .pb-line {
+    fill: transparent;
     stroke: hsl(230,30%,20%);
     stroke-width: 3;
 }
