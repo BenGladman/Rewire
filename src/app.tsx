@@ -4,13 +4,21 @@ import * as Types from "./types";
 import Replumb from "./components/Replumb";
 
 const initialBoxes: Types.BoxDefinition[] = [
-    { id: "A", title: "Title A", x: 10, y: 10, width: 100, height: 100, content: <div>Box A</div> },
-    { id: "B", x: 120, y: 10, width: 100, height: 100, content: <div>Box B</div> }
+    { key: "B1", title: "Title A", x: 10, y: 10, width: 100, height: 100, content: <div>Box A</div> },
+    { key: "B2", x: 120, y: 10, width: 100, height: 100, content: <div>Box B</div> }
 ];
 
 const initialLines: Types.LineDefinition[] = [
-    { x1: 10, y1: 10, endpointType1: "square", x2: 50, y2: 50, endpointType2: "arrow" },
-    { x1: 100, y1: 10, angle1: 0, endpointType1: "circle", x2: 50, y2: 150, angle2: 90, endpointType2: "arrow" }
+    {
+        key: "L1",
+        endpoint1: { key: "E1", x: 10, y: 10, endpointType: "square" },
+        endpoint2: { key: "F1", x: 50, y: 50, endpointType: "arrow" }
+    },
+    {
+        key: "L2",
+        endpoint1: { key: "E2", x: 100, y: 10, angle: 0, endpointType: "circle" },
+        endpoint2: { key: "F2", x: 50, y: 150, angle: 90, endpointType: "arrow" }
+    }
 ];
 
 const initData = {

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export interface BoxDefinition {
-    id: string;
+    key: string;
     title?: string;
     x: number;
     y: number;
@@ -12,19 +12,23 @@ export interface BoxDefinition {
 
 export type EndpointType = "none" | "circle" | "square" | "arrow";
 
+export interface EndpointDefinition {
+    key: string;
+    x: number;
+    y: number;
+    angle?: number;
+    endpointType?: EndpointType;
+    size?: number;
+}
+
 export interface LineDefinition {
-    x1: number;
-    y1: number;
-    angle1?: number;
-    endpointType1?: EndpointType;
-    x2: number;
-    y2: number;
-    angle2?: number;
-    endpointType2?: EndpointType;
+    key: string;
+    endpoint1: EndpointDefinition;
+    endpoint2: EndpointDefinition;
 }
 
 export interface State {
-    boxes?: Set<BoxDefinition>;
+    boxes?: Map<string, BoxDefinition>;
     lines?: LineDefinition[];
     onMouseMove?: (ev: React.MouseEvent) => void;
 }

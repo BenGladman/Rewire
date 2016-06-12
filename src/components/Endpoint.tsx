@@ -4,27 +4,17 @@ import moveEndpoint from "../actions/moveEndpoint";
 import setMouseMove from "../actions/setMouseMove";
 
 interface EndpointProps {
-    type?: Types.EndpointType;
-    x: number;
-    y: number;
+    endpoint: Types.EndpointDefinition;
     angle: number;
-    size?: number;
-    lineId: number;
-    lineEnd: number;
 }
 
-export default function Endpoint({type, x, y, angle = 0, size = 6, lineId, lineEnd}: EndpointProps) {
+export default function Endpoint({endpoint, angle}: EndpointProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const offsetX = x - ev.pageX;
         const offsetY = y - ev.pageY;
 
         const onMouseMove = (ev: React.MouseEvent) => {
-            const lineProps = {
-                ["x" + lineEnd]: ev.pageX + offsetX,
-                ["y" + lineEnd]: ev.pageY + offsetY
-            };
-
-            moveEndpoint(false, lineId, lineProps);
+            moveEndpoint(endpoint, ev.pageX + offsetX, ev.pageY + offsetY);
         };
 
         setMouseMove(onMouseMove);
@@ -41,7 +31,11 @@ export default function Endpoint({type, x, y, angle = 0, size = 6, lineId, lineE
         onMouseDown
     };
 
-    switch (type) {
+    const x = endpoint.x;
+    const y = endpoint.y;
+    const size = endpoint.size || 6;
+
+    switch (endpoint.endpointType) {
         case "circle":
             return (<circle {...endpointProps} cx={x} cy={y} r={size} />);
         case "square":

@@ -21,19 +21,19 @@ export default function LineContainer({lines}: LineContainerProps) {
             const x1 = ev.pageX - bounds.left;
             const y1 = ev.pageY - bounds.top;
 
-            let starting = true;
+            let addedLine: Types.LineDefinition = null;
+
             const onMouseMove = (ev: React.MouseEvent) => {
                 const x2 = ev.pageX - bounds.left;
                 const y2 = ev.pageY - bounds.top;
 
-                if (starting) {
+                if (addedLine === null) {
                     const distTrigger = 20;
                     if (Math.abs(x2 - x1) > distTrigger || Math.abs(y2 - y1) > distTrigger) {
-                        addLine(x1, y1, x2, y2);
-                        starting = false;
+                        addedLine = addLine(x1, y1, x2, y2);
                     }
                 } else {
-                    moveEndpoint(true, 0, { x2, y2 });
+                    moveEndpoint(addedLine.endpoint2, x2, y2);
                 }
             };
 
@@ -51,24 +51,29 @@ export default function LineContainer({lines}: LineContainerProps) {
         let angle1: number;
         let angle2: number;
 
-        const lineprops = { lineId: ix, key: ix, x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 };
-        if (line.angle1 === undefined) {
-            angle1 = Math.atan2(line.y2 - line.y1, line.x2 - line.x1) * rad2deg;
+        const lineprops = {
+            key: line.key,
+            x1: line.endpoint1.x,
+            y1: line.endpoint1.y,
+            x2: line.endpoint2.x,
+            y2: line.endpoint2.y
+        };
+
+        if (line.endpoint1.angle === undefined) {
+            angle1 = Math.atan2(line.endpoint2.y - line.endpoint1.y, line.endpoint2.x - line.endpoint1.x) * rad2deg;
             angle2 = angle1 + 180;
             lineEls.push(<Straight {...lineprops} />);
         } else {
-            angle1 = line.angle1;
-            angle2 = line.angle2 === undefined ? angle1 : line.angle2;
+            angle1 = line.endpoint1.angle;
+            angle2 = line.endpoint2.angle === undefined ? angle1 : line.endpoint2.angle;
             lineEls.push(<Bezier {...lineprops} angle1={angle1} angle2={angle2} />);
         }
 
-        if (line.endpointType1) {
-            const endpoint1props = { lineId: ix, key: ix + "e1", type: line.endpointType1, x: line.x1, y: line.y1, angle: angle1 };
-            endpointEls.push(<Endpoint {...endpoint1props} lineEnd={1} />);
+        if (line.endpoint1.endpointType) {
+            endpointEls.push(<Endpoint key={line.endpoint1.key} endpoint={line.endpoint1} angle={angle1} />);
         }
-        if (line.endpointType2) {
-            const endpoint2props = { lineId: ix, key: ix + "e2", type: line.endpointType2, x: line.x2, y: line.y2, angle: angle2 };
-            endpointEls.push(<Endpoint {...endpoint2props} lineEnd={2} />);
+        if (line.endpoint2.endpointType) {
+            endpointEls.push(<Endpoint key={line.endpoint2.key} endpoint={line.endpoint2} angle={angle2} />);
         }
     });
 

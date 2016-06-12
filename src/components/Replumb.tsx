@@ -18,7 +18,7 @@ export default class Replumb extends React.Component<ReplumbProps, Types.State> 
         super(props);
 
         this.state = {
-            boxes: new Set(props.initialBoxes),
+            boxes: new Map(props.initialBoxes.map((box): [string, Types.BoxDefinition] => [box.key, box])),
             lines: props.initialLines
         };
 

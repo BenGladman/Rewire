@@ -3,7 +3,7 @@ import * as React from "react";
 const deg2rad = Math.PI / 180;
 
 interface BezierProps {
-    lineId: number;
+    key: string;
     x1: number;
     y1: number;
     angle1?: number;

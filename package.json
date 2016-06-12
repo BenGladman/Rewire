@@ -12,6 +12,7 @@
   "dependencies": {
     "es5-shim": "^4.5.8",
     "es6-shim": "^0.35.1",
+    "node-uuid": "^1.4.7",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
