@@ -1,16 +1,17 @@
 import * as React from "react";
-import Container from "./Container";
+import * as Types from "../types";
 import { initialiseStore } from "../store";
+import Container from "./Container";
 import clearAll from "../actions/clearAll";
 
 interface ReplumbProps {
     heading: string;
     height: number;
     width: number;
-    initialLines: any[];
+    initialLines: Types.LineDefinition[];
 }
 
-export default class Replumb extends React.Component<ReplumbProps, any> {
+export default class Replumb extends React.Component<ReplumbProps, Types.State> {
     constructor(props: ReplumbProps) {
         super(props);
         this.state = { lines: props.initialLines };

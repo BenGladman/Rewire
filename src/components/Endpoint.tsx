@@ -1,9 +1,10 @@
 import * as React from "react";
+import * as Types from "../types";
 import moveEndpoint from "../actions/moveEndpoint";
 import setMouseMove from "../actions/setMouseMove";
 
 interface EndpointProps {
-    type?: 'none' | 'circle' | 'square' | 'arrow';
+    type?: Types.EndpointType;
     x: number;
     y: number;
     angle: number;

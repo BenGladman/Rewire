@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Types from "../types";
 import Bezier from "./Bezier";
 import Endpoint from "./Endpoint";
 import Straight from "./Straight";
@@ -9,7 +10,7 @@ import setMouseMove from "../actions/setMouseMove";
 const rad2deg = 180 / Math.PI;
 
 interface ContainerProps {
-    lines: any[];
+    lines: Types.LineDefinition[];
 }
 
 export default function Container({lines}: ContainerProps) {
@@ -75,7 +76,8 @@ export default function Container({lines}: ContainerProps) {
     return (
         <svg className="pb-svg"
             onMouseDown={onMouseDown}>
-            {lineEls.concat(endpointEls) }
+            {lineEls}
+            {endpointEls}
         </svg>
     );
 };
