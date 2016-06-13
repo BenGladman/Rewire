@@ -6,9 +6,11 @@ interface BoxContainerProps {
     boxes: Map<string, Types.BoxDefinition>;
 }
 
-export default function BoxContainer ({boxes}: BoxContainerProps) {
+export default function BoxContainer({boxes}: BoxContainerProps) {
     const boxEls: JSX.Element[] = [];
-    boxes.forEach((box) => boxEls.push(<Box key={box.key} box={box} />));
+    for (let [boxkey, box] of boxes) {
+        boxEls.push(<Box key={boxkey} box={box} />);
+    };
 
     return (
         <div className="pb-boxcontainer">

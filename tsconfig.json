@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
-		"target": "es5",
-		"module": "commonjs",
-		"jsx": "react",
+		"target": "es6",
+		"module": "none",
+		"jsx": "preserve",
 		"noImplicitAny": true,
 		"sourceMap": true,
 		"noEmitOnError": false,

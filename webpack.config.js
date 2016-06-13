@@ -18,9 +18,9 @@ module.exports = {
         loaders: [
             {
                 // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-                loader: 'ts-loader',
-                include: [path.resolve(__dirname, "src")],
-                test: /\.tsx?$/
+                test: /\.tsx?$/,
+                loader: 'babel-loader!ts-loader',
+                include: [path.resolve(__dirname, "src")]
             }
         ],
 
