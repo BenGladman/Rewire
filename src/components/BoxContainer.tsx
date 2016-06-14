@@ -3,13 +3,14 @@ import * as Types from "../types";
 import Box from "./Box";
 
 interface BoxContainerProps {
-    boxes: Map<string, Types.BoxDefinition>;
+    boxes: Set<Types.BoxDefinition>;
+    activeBox: Types.BoxDefinition;
 }
 
-export default function BoxContainer({boxes}: BoxContainerProps) {
+export default function BoxContainer({boxes, activeBox}: BoxContainerProps) {
     const boxEls: JSX.Element[] = [];
-    for (let [boxkey, box] of boxes) {
-        boxEls.push(<Box key={boxkey} box={box} />);
+    for (let box of boxes) {
+        boxEls.push(<Box key={box.key} box={box} isActive={box === activeBox}/>);
     };
 
     return (

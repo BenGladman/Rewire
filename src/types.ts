@@ -1,5 +1,7 @@
 import * as React from "react";
 
+export type BoxSide = "top" | "right" | "bottom" | "left";
+
 export interface BoxDefinition {
     key: string;
     title?: string;
@@ -14,8 +16,13 @@ export type EndpointType = "none" | "circle" | "square" | "arrow";
 
 export interface EndpointDefinition {
     key: string;
-    x: number;
-    y: number;
+    box?: {
+        box: BoxDefinition;
+        side?: BoxSide;
+        pos?: number;
+    };
+    x?: number;
+    y?: number;
     angle?: number;
     endpointType?: EndpointType;
     size?: number;
@@ -28,7 +35,9 @@ export interface LineDefinition {
 }
 
 export interface State {
-    boxes?: Map<string, BoxDefinition>;
-    lines?: LineDefinition[];
+    boxes?: Set<BoxDefinition>;
+    endpoints?: Set<EndpointDefinition>;
+    lines?: Set<LineDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
+    activeBox?: BoxDefinition;
 }

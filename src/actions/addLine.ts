@@ -11,7 +11,7 @@ export default function addLine(x1: number, y1: number, x2: number, y2: number) 
         endpoint2: { key: nextKey(), x: x2, y: y2, endpointType: "arrow" }
     };
 
-    lines.push(newLine);
+    lines.add(newLine);
     setState({ lines });
 
     return newLine;

@@ -41,7 +41,7 @@ export default function Endpoint({endpoint, angle}: EndpointProps) {
         case "square":
             return (<rect {...endpointProps} x={x - size} y={y - size} width={size * 2} height={size * 2} />);
         case "arrow":
-            const points = `${x - size},${y} ${x + size},${y + size} ${x + size},${y - size}`;
+            const points = `${x},${y - size} ${x + size},${y + size} ${x - size},${y + size}`;
             const transform = Math.abs(angle) < 1 ? null : `rotate (${angle} ${x} ${y})`;
             return (<polygon {...endpointProps} points={points} transform={transform} />);
         default:

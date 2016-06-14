@@ -20,6 +20,10 @@
     position: absolute;
 }
 
+.pb-box-active {
+    border: 1px solid hsl(60,50%,50%);
+}
+
 .pb-boxheader {
     background: hsl(230,30%,20%);
     color: hsl(230,30%,98%);

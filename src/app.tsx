@@ -8,16 +8,30 @@ const initialBoxes: Types.BoxDefinition[] = [
     { key: "B2", x: 120, y: 10, width: 100, height: 100, content: <div>Box B</div> }
 ];
 
+const initialEndpoints: Types.EndpointDefinition[] = [
+    { key: "E1", box: { box: initialBoxes[0], side: "right" }, endpointType: "arrow" },
+    { key: "E2", box: { box: initialBoxes[1], side: "left" }, endpointType: "arrow" },
+    { key: "E3", box: { box: initialBoxes[0], side: "top" }, endpointType: "arrow" },
+    { key: "E4", box: { box: initialBoxes[1], side: "top" }, endpointType: "arrow" },
+    { key: "E5", box: { box: initialBoxes[0], side: "bottom" }, endpointType: "arrow" },
+    { key: "E6", box: { box: initialBoxes[1], side: "bottom" }, endpointType: "arrow" }
+];
+
 const initialLines: Types.LineDefinition[] = [
     {
         key: "L1",
-        endpoint1: { key: "E1", x: 10, y: 10, endpointType: "square" },
-        endpoint2: { key: "F1", x: 50, y: 50, endpointType: "arrow" }
+        endpoint1: initialEndpoints[0],
+        endpoint2: initialEndpoints[1]
     },
     {
         key: "L2",
-        endpoint1: { key: "E2", x: 100, y: 10, angle: 0, endpointType: "circle" },
-        endpoint2: { key: "F2", x: 50, y: 150, angle: 90, endpointType: "arrow" }
+        endpoint1: initialEndpoints[2],
+        endpoint2: initialEndpoints[3]
+    },
+    {
+        key: "L3",
+        endpoint1: initialEndpoints[4],
+        endpoint2: initialEndpoints[5]
     }
 ];
 
@@ -26,6 +40,7 @@ const initData = {
     height: 600,
     width: 600,
     initialBoxes,
+    initialEndpoints,
     initialLines,
 };
 

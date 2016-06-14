@@ -6,11 +6,10 @@ import Straight from "./Straight";
 import addLine from "../actions/addLine";
 import moveEndpoint from "../actions/moveEndpoint";
 import setMouseMove from "../actions/setMouseMove";
-
-const rad2deg = 180 / Math.PI;
+import lineAngleDegrees from "../util/lineAngleDegrees";
 
 interface LineContainerProps {
-    lines: Types.LineDefinition[];
+    lines: Set<Types.LineDefinition>;
 }
 
 export default function LineContainer({lines}: LineContainerProps) {
@@ -60,7 +59,7 @@ export default function LineContainer({lines}: LineContainerProps) {
         };
 
         if (line.endpoint1.angle === undefined) {
-            angle1 = Math.atan2(line.endpoint2.y - line.endpoint1.y, line.endpoint2.x - line.endpoint1.x) * rad2deg;
+            angle1 = lineAngleDegrees(line.endpoint2.x, line.endpoint2.y, line.endpoint1.x, line.endpoint1.y);
             angle2 = angle1 + 180;
             lineEls.push(<Straight {...lineprops} />);
         } else {
