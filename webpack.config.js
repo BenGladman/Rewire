@@ -36,5 +36,5 @@ module.exports = {
     },
 
     debug: true,
-    watch: true
+    watch: false
 };
