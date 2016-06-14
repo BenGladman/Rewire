@@ -35,12 +35,18 @@ export default function Box({box, isActive}: BoxProps) {
         setActiveBox(null);
     };
 
+    const headerEl = (box.title)
+        ? <h3 className="pb-boxheader">{box.title}</h3>
+        : null;
+
+
     return (
-        <div className={"pb-box" + (isActive ? " pb-box-active" : "")}
+        <div className={"pb-box" + (isActive ? " pb-box-active" : "") }
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            onMouseDown={onMouseDown}
             style={{ left: box.x, top: box.y, width: box.width, height: box.height }}>
-            <h3 className="pb-boxheader" onMouseDown={onMouseDown}>{box.title}</h3>
+            {headerEl}
             {box.content}
         </div>
     );
