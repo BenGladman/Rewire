@@ -1,37 +1,37 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Types from "./types";
-import Replumb from "./components/Replumb";
+import Rewire from "./components/Rewire";
 
 const initialBoxes: Types.BoxDefinition[] = [
     { key: "B1", title: "Title A", x: 10, y: 10, width: 100, height: 100, content: <div>Box A</div> },
     { key: "B2", x: 120, y: 10, width: 100, height: 100, content: <div>Box B</div> }
 ];
 
-const initialEndpoints: Types.EndpointDefinition[] = [
-    { key: "E1", box: { box: initialBoxes[0], side: "right" }, endpointType: "arrow" },
-    { key: "E2", box: { box: initialBoxes[1], side: "left" }, endpointType: "arrow" },
-    { key: "E3", box: { box: initialBoxes[0], side: "top" }, endpointType: "arrow" },
-    { key: "E4", box: { box: initialBoxes[1], side: "top" }, endpointType: "arrow" },
-    { key: "E5", box: { box: initialBoxes[0], side: "bottom" }, endpointType: "arrow" },
-    { key: "E6", box: { box: initialBoxes[1], side: "bottom" }, endpointType: "arrow" }
+const initialJacks: Types.JackDefinition[] = [
+    { key: "E1", box: { box: initialBoxes[0], side: "right" }, type: "arrow" },
+    { key: "E2", box: { box: initialBoxes[1], side: "left" }, type: "arrow" },
+    { key: "E3", box: { box: initialBoxes[0], side: "top" }, type: "arrow" },
+    { key: "E4", box: { box: initialBoxes[1], side: "top" }, type: "arrow" },
+    { key: "E5", box: { box: initialBoxes[0], side: "bottom" }, type: "arrow" },
+    { key: "E6", box: { box: initialBoxes[1], side: "bottom" }, type: "arrow" }
 ];
 
-const initialLines: Types.LineDefinition[] = [
+const initialWires: Types.WireDefinition[] = [
     {
         key: "L1",
-        endpoint1: initialEndpoints[0],
-        endpoint2: initialEndpoints[1]
+        jack1: initialJacks[0],
+        jack2: initialJacks[1]
     },
     {
         key: "L2",
-        endpoint1: initialEndpoints[2],
-        endpoint2: initialEndpoints[3]
+        jack1: initialJacks[2],
+        jack2: initialJacks[3]
     },
     {
         key: "L3",
-        endpoint1: initialEndpoints[4],
-        endpoint2: initialEndpoints[5]
+        jack1: initialJacks[4],
+        jack2: initialJacks[5]
     }
 ];
 
@@ -40,8 +40,8 @@ const initData = {
     height: 600,
     width: 600,
     initialBoxes,
-    initialEndpoints,
-    initialLines,
+    initialJacks,
+    initialWires,
 };
 
-ReactDOM.render(<Replumb {...initData} />, document.getElementById("PbApp"));
+ReactDOM.render(<Rewire {...initData} />, document.getElementById("PbApp"));

@@ -2,7 +2,7 @@ import * as Types from "../types";
 import { getState, setState } from "../store";
 import lineAngleDegrees from "../util/lineAngleDegrees";
 
-export default function (endpoint: Types.EndpointDefinition, x: number, y: number) {
+export default function (jack: Types.JackDefinition, x: number, y: number) {
     const {activeBox} = getState();
 
     if (activeBox) {
@@ -22,11 +22,11 @@ export default function (endpoint: Types.EndpointDefinition, x: number, y: numbe
         } else {
             side = "top";
         }
-        endpoint.box = { box: activeBox, side };
+        jack.box = { box: activeBox, side };
     } else {
-        endpoint.box = null;
-        endpoint.x = x;
-        endpoint.y = y;
+        jack.box = null;
+        jack.x = x;
+        jack.y = y;
     }
     setState({});
 };

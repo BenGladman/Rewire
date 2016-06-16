@@ -36,12 +36,12 @@ export default function Box({box, isActive}: BoxProps) {
     };
 
     const headerEl = (box.title)
-        ? <h3 className="pb-boxheader">{box.title}</h3>
+        ? <h3 className="rw-boxheader">{box.title}</h3>
         : null;
 
 
     return (
-        <div className={"pb-box" + (isActive ? " pb-box-active" : "") }
+        <div className={"rw-box" + (isActive ? " rw-box-active" : "") }
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onMouseDown={onMouseDown}

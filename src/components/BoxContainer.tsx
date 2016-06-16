@@ -14,7 +14,7 @@ export default function BoxContainer({boxes, activeBox}: BoxContainerProps) {
     };
 
     return (
-        <div className="pb-boxcontainer">
+        <div className="rw-boxcontainer">
             {boxEls}
         </div>
     );

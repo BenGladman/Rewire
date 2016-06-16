@@ -10,7 +10,7 @@ interface StraightProps {
 
 export default function Straight({x1, y1, x2, y2}: StraightProps) {
     return (
-        <line className="pb-line"
+        <line className="rw-wire"
             x1={x1} y1={y1}
             x2={x2} y2={y2} />
     );

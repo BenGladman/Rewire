@@ -1,11 +1,11 @@
 import { getState, setState } from "../store";
 
 export default function () {
-    const { boxes, endpoints, lines } = getState();
+    const { boxes, jacks, wires } = getState();
 
     boxes.clear();
-    endpoints.clear();
-    lines.clear();
+    jacks.clear();
+    wires.clear();
 
     setState({});
 }

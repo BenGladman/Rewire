@@ -12,9 +12,9 @@ export interface BoxDefinition {
     content: JSX.Element;
 }
 
-export type EndpointType = "none" | "circle" | "square" | "arrow";
+export type JackType = "none" | "circle" | "square" | "arrow";
 
-export interface EndpointDefinition {
+export interface JackDefinition {
     key: string;
     box?: {
         box: BoxDefinition;
@@ -24,20 +24,20 @@ export interface EndpointDefinition {
     x?: number;
     y?: number;
     angle?: number;
-    endpointType?: EndpointType;
+    type?: JackType;
     size?: number;
 }
 
-export interface LineDefinition {
+export interface WireDefinition {
     key: string;
-    endpoint1: EndpointDefinition;
-    endpoint2: EndpointDefinition;
+    jack1: JackDefinition;
+    jack2: JackDefinition;
 }
 
 export interface State {
     boxes?: Set<BoxDefinition>;
-    endpoints?: Set<EndpointDefinition>;
-    lines?: Set<LineDefinition>;
+    jacks?: Set<JackDefinition>;
+    wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
     activeBox?: BoxDefinition;
 }
