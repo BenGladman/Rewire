@@ -2,11 +2,9 @@ import * as React from "react";
 import * as Types from "../types";
 import Bezier from "./Bezier";
 import Jack from "./Jack";
-import Straight from "./Straight";
 import addWire from "../actions/addWire";
 import moveJack from "../actions/moveJack";
 import setMouseMove from "../actions/setMouseMove";
-import lineAngleDegrees from "../util/lineAngleDegrees";
 
 interface WireContainerProps {
     wires: Set<Types.WireDefinition>;
@@ -47,32 +45,17 @@ export default function WireContainer({wires}: WireContainerProps) {
     const jackEls: JSX.Element[] = [];
 
     wires.forEach((wire, ix) => {
-        let angle1: number;
-        let angle2: number;
+        const isConnected = !!wire.jack1.box && !!wire.jack2.box;
 
-        const wireprops = {
-            key: wire.key,
-            x1: wire.jack1.x,
-            y1: wire.jack1.y,
-            x2: wire.jack2.x,
-            y2: wire.jack2.y
-        };
-
-        if (wire.jack1.angle === undefined) {
-            angle1 = lineAngleDegrees(wire.jack2.x, wire.jack2.y, wire.jack1.x, wire.jack1.y);
-            angle2 = angle1 + 180;
-            wireEls.push(<Straight {...wireprops} />);
-        } else {
-            angle1 = wire.jack1.angle;
-            angle2 = wire.jack2.angle === undefined ? angle1 : wire.jack2.angle;
-            wireEls.push(<Bezier {...wireprops} angle1={angle1} angle2={angle2} />);
-        }
+        wireEls.push(<Bezier key={wire.key} isConnected={isConnected}
+            x1={wire.jack1.x} y1={wire.jack1.y} angle1={wire.jack1.angle}
+            x2={wire.jack2.x} y2={wire.jack2.y} angle2={wire.jack2.angle} />);
 
         if (wire.jack1.type) {
-            jackEls.push(<Jack key={wire.jack1.key} jack={wire.jack1} angle={angle1} />);
+            jackEls.push(<Jack key={wire.jack1.key} jack={wire.jack1} />);
         }
         if (wire.jack2.type) {
-            jackEls.push(<Jack key={wire.jack2.key} jack={wire.jack2} angle={angle2} />);
+            jackEls.push(<Jack key={wire.jack2.key} jack={wire.jack2} />);
         }
     });
 

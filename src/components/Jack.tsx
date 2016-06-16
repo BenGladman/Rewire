@@ -5,10 +5,9 @@ import setMouseMove from "../actions/setMouseMove";
 
 interface JackProps {
     jack: Types.JackDefinition;
-    angle: number;
 }
 
-export default function Jack({jack, angle}: JackProps) {
+export default function Jack({jack}: JackProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const offsetX = x - ev.pageX;
         const offsetY = y - ev.pageY;
@@ -27,12 +26,13 @@ export default function Jack({jack, angle}: JackProps) {
     };
 
     const JackProps = {
-        className: "rw-jack",
+        className: "rw-jack" + (jack.box ? " rw-jack-connected" : ""),
         onMouseDown
     };
 
     const x = jack.x;
     const y = jack.y;
+    const angle = jack.angle || 0;
     const size = jack.size || 6;
 
     switch (jack.type) {

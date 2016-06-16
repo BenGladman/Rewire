@@ -11,9 +11,12 @@ interface BezierProps {
     y2: number;
     angle2?: number;
     straightness?: number;
+    isConnected?: boolean;
 }
 
-export default function Bezier ({x1, y1, angle1 = 0, x2, y2, angle2, straightness = 100}: BezierProps) {
+export default function Bezier({x1, y1, angle1 = 0, x2, y2, angle2 = 0, straightness = 100, isConnected}: BezierProps) {
+    const className = "rw-wire" + (isConnected ? " rw-wire-connected" : "");
+
     const angle1rad = (angle1 * deg2rad);
     const angle2rad = angle2 === undefined ? angle1 : (angle2 * deg2rad);
 
@@ -24,5 +27,6 @@ export default function Bezier ({x1, y1, angle1 = 0, x2, y2, angle2, straightnes
     const c2x = x2 - xdist * Math.sin(angle2rad);
     const c2y = y2 + ydist * Math.cos(angle2rad);
     const path = `M${x1} ${y1} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${x2} ${y2}`;
-    return (<path className="rw-wire" d={path} />);
+
+    return (<path className={className} d={path} />);
 }

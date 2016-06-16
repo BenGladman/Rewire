@@ -3,16 +3,26 @@ import nextKey from "./nextKey";
 import { getState, setState } from "../store";
 
 export default function (x1: number, y1: number, x2: number, y2: number) {
-    const { wires } = getState();
+    const { jacks, wires } = getState();
 
-    const newWire: Types.WireDefinition = {
-        key: nextKey(),
-        jack1: { key: nextKey(), x: x1, y: y1, type: "arrow" },
-        jack2: { key: nextKey(), x: x2, y: y2, type: "arrow" }
+    const jack1: Types.JackDefinition = {
+        key: nextKey(), x: x1, y: y1, type: "arrow"
     };
 
-    wires.add(newWire);
-    setState({ wires });
+    const jack2: Types.JackDefinition = {
+        key: nextKey(), x: x2, y: y2, type: "arrow"
+    };
 
-    return newWire;
+    const wire: Types.WireDefinition = {
+        key: nextKey(),
+        jack1,
+        jack2
+    };
+
+    jacks.add(jack1);
+    jacks.add(jack2);
+    wires.add(wire);
+    setState({});
+
+    return wire;
 }
