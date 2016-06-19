@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Types from "./types";
 import Rewire from "./components/Rewire";
+import { arrowJackType } from "./components/JackType";
 
 const initialBoxes: Types.BoxDefinition[] = [
     { key: "B1", title: "Title A", x: 10, y: 10, width: 100, height: 100, content: <div>Box A</div> },
@@ -9,12 +10,12 @@ const initialBoxes: Types.BoxDefinition[] = [
 ];
 
 const initialJacks: Types.JackDefinition[] = [
-    { key: "E1", box: { box: initialBoxes[0], side: "right" }, type: "arrow" },
-    { key: "E2", box: { box: initialBoxes[1], side: "left" }, type: "arrow" },
-    { key: "E3", box: { box: initialBoxes[0], side: "top" }, type: "arrow" },
-    { key: "E4", box: { box: initialBoxes[1], side: "top" }, type: "arrow" },
-    { key: "E5", box: { box: initialBoxes[0], side: "bottom" }, type: "arrow" },
-    { key: "E6", box: { box: initialBoxes[1], side: "bottom" }, type: "arrow" }
+    { key: "E1", box: { box: initialBoxes[0], side: "right" }, type: arrowJackType },
+    { key: "E2", box: { box: initialBoxes[1], side: "left" }, type: arrowJackType },
+    { key: "E3", box: { box: initialBoxes[0], side: "top" }, type: arrowJackType },
+    { key: "E4", box: { box: initialBoxes[1], side: "top" }, type: arrowJackType },
+    { key: "E5", box: { box: initialBoxes[0], side: "bottom" }, type: arrowJackType },
+    { key: "E6", box: { box: initialBoxes[1], side: "bottom" }, type: arrowJackType }
 ];
 
 const initialWires: Types.WireDefinition[] = [

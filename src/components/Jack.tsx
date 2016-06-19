@@ -9,8 +9,8 @@ interface JackProps {
 
 export default function Jack({jack}: JackProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
-        const offsetX = x - ev.pageX;
-        const offsetY = y - ev.pageY;
+        const offsetX = jack.x - ev.pageX;
+        const offsetY = jack.y - ev.pageY;
 
         const onMouseMove = (ev: React.MouseEvent) => {
             moveJack(jack, ev.pageX + offsetX, ev.pageY + offsetY);
@@ -25,26 +25,12 @@ export default function Jack({jack}: JackProps) {
         ev.preventDefault();
     };
 
-    const JackProps = {
+    return jack.type({
+        x: jack.x,
+        y: jack.y,
+        angle: jack.angle || 0,
+        size: 6,
         className: "rw-jack" + (jack.box ? " rw-jack-connected" : ""),
         onMouseDown
-    };
-
-    const x = jack.x;
-    const y = jack.y;
-    const angle = jack.angle || 0;
-    const size = jack.size || 6;
-
-    switch (jack.type) {
-        case "circle":
-            return (<circle {...JackProps} cx={x} cy={y} r={size} />);
-        case "square":
-            return (<rect {...JackProps} x={x - size} y={y - size} width={size * 2} height={size * 2} />);
-        case "arrow":
-            const points = `${x},${y - size} ${x + size},${y + size} ${x - size},${y + size}`;
-            const transform = Math.abs(angle) < 1 ? null : `rotate (${angle} ${x} ${y})`;
-            return (<polygon {...JackProps} points={points} transform={transform} />);
-        default:
-            return null;
-    }
+    });
 };

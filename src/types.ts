@@ -12,7 +12,16 @@ export interface BoxDefinition {
     content: JSX.Element;
 }
 
-export type JackType = "none" | "circle" | "square" | "arrow";
+export interface JackTypeProps {
+    x: number;
+    y: number;
+    angle: number;
+    size: number;
+    className: string;
+    onMouseDown: (ev: React.MouseEvent) => void;
+}
+
+export type JackType = (props: JackTypeProps) => JSX.Element;
 
 export interface JackDefinition {
     key: string;
@@ -24,8 +33,7 @@ export interface JackDefinition {
     x?: number;
     y?: number;
     angle?: number;
-    type?: JackType;
-    size?: number;
+    type: JackType;
 }
 
 export interface WireDefinition {
