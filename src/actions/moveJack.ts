@@ -1,32 +1,30 @@
 import * as Types from "../types";
 import { getState, setState } from "../store";
-import lineAngleDegrees from "../util/lineAngleDegrees";
 
 export default function (jack: Types.JackDefinition, x: number, y: number) {
-    const {activeBox} = getState();
+    const {sockets, activeBox} = getState();
 
-    if (activeBox) {
-        const centrex = activeBox.x + (activeBox.width / 2);
-        const centrey = activeBox.y + (activeBox.height / 2);
-        const angle = lineAngleDegrees(centrex, centrey, x, y);
+    let newSocket: Types.SocketDefinition;
+    let dist = Infinity;
 
-        let side: Types.BoxSide;
-        if (angle < 45) {
-            side = "top";
-        } else if (angle < 135) {
-            side = "right";
-        } else if (angle < 225) {
-            side = "bottom";
-        } else if (angle < 315) {
-            side = "left";
-        } else {
-            side = "top";
+    // find nearest socket
+    sockets.forEach((socket) => {
+        if (socket.box === activeBox && socket.type === jack.type) {
+            const dx = x - socket.x;
+            const dy = y - socket.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < dist) {
+                dist = d;
+                newSocket = socket;
+            }
         }
-        jack.box = { box: activeBox, side };
-    } else {
-        jack.box = null;
+    });
+
+    jack.socket = newSocket;
+    if (!newSocket) {
         jack.x = x;
         jack.y = y;
     }
+
     setState({});
 };

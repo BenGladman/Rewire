@@ -30,7 +30,9 @@ export default function Jack({jack}: JackProps) {
         y: jack.y,
         angle: jack.angle || 0,
         size: 6,
-        className: "rw-jack" + (jack.box ? " rw-jack-connected" : ""),
-        onMouseDown
+        cprops: {
+            className: "rw-jack" + (jack.socket ? " rw-jack-connected" : ""),
+            onMouseDown
+        }
     });
 };

@@ -53,6 +53,11 @@
     stroke: hsl(60,60%,20%);
 }
 
+.rw-socket {
+    fill: hsl(230,30%,20%);
+    stroke-width: 0;
+}
+
 .rw-jack {
     fill: hsl(230,30%,70%);
     stroke: hsl(230,30%,20%);

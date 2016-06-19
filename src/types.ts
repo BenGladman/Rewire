@@ -17,19 +17,30 @@ export interface JackTypeProps {
     y: number;
     angle: number;
     size: number;
-    className: string;
-    onMouseDown: (ev: React.MouseEvent) => void;
+    cprops: {
+        className?: string;
+        onMouseDown?: (ev: React.MouseEvent) => void;
+        onMouseEnter?: (ev: React.MouseEvent) => void;
+        onMouseLeave?: (ev: React.MouseEvent) => void;
+    };
 }
 
 export type JackType = (props: JackTypeProps) => JSX.Element;
 
+export interface SocketDefinition {
+    key: string;
+    box: BoxDefinition;
+    side: BoxSide;
+    pos: number;
+    x?: number;
+    y?: number;
+    angle?: number;
+    type: JackType;
+}
+
 export interface JackDefinition {
     key: string;
-    box?: {
-        box: BoxDefinition;
-        side?: BoxSide;
-        pos?: number;
-    };
+    socket?: SocketDefinition;
     x?: number;
     y?: number;
     angle?: number;
@@ -44,6 +55,7 @@ export interface WireDefinition {
 
 export interface State {
     boxes?: Set<BoxDefinition>;
+    sockets?: Set<SocketDefinition>;
     jacks?: Set<JackDefinition>;
     wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
