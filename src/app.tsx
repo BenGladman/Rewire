@@ -56,4 +56,4 @@ const initData = {
     initialWires,
 };
 
-ReactDOM.render(<Rewire {...initData} />, document.getElementById("PbApp"));
+ReactDOM.render(<Rewire {...initData} />, document.getElementById("RwApp"));

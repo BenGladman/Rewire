@@ -1,4 +1,9 @@
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var postcssImport = require('postcss-import');
+var postcssCustomProperties = require('postcss-custom-properties');
+var postcssColorFunction = require('postcss-color-function');
 
 module.exports = {
     entry: "./src/app.tsx",
@@ -21,6 +26,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: 'babel-loader!ts-loader',
                 include: [path.resolve(__dirname, "src")]
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
             }
         ],
 
@@ -30,8 +39,20 @@ module.exports = {
         ]
     },
 
+    plugins: [
+        // This plugin moves all the CSS into a separate stylesheet
+        new ExtractTextPlugin('bundle.css')
+    ],
+
+    postcss: [
+        autoprefixer({ browsers: ['last 2 versions'] }),
+        postcssImport(),
+        postcssCustomProperties(),
+        postcssColorFunction()
+    ],
+
     externals: {
-        "react": "React", 
+        "react": "React",
         "react-dom": "ReactDOM"
     },
 

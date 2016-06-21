@@ -1,0 +1,20 @@
+.rw-Box {
+    background: hsl(230, 30%, 99%);
+    border: 1px solid hsl(230, 30%, 20%);
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.rw-Box.is-active {
+    border: 1px solid hsl(60, 50%, 50%);
+}
+
+.rw-Box-header {
+    background: hsl(230, 30%, 20%);
+    color: hsl(230, 30%, 98%);
+    font-size: 0.6rem;
+    font-weight: normal;
+    margin: 0;
+    padding: 2px 0;
+    text-align: center;
+}

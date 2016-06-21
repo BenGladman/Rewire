@@ -1,0 +1,9 @@
+.rw-Wire {
+    fill: transparent;
+    stroke: hsl(230, 30%, 20%);
+    stroke-width: 3;
+}
+
+.rw-Wire.is-connected {
+    stroke: hsl(60, 60%, 20%);
+}

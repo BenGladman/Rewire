@@ -1,9 +1,10 @@
 import * as React from "react";
-import * as Types from "../types";
-import { initialiseStore } from "../store";
-import BoxContainer from "./BoxContainer";
-import WireContainer from "./WireContainer";
-import clearAll from "../actions/clearAll";
+import * as Types from "../../types";
+import { initialiseStore } from "../../store";
+import BoxContainer from "../BoxContainer";
+import WireContainer from "../WireContainer";
+import clearAll from "../../actions/clearAll";
+import "./index.css";
 
 interface RewireProps {
     heading: string;
@@ -37,9 +38,9 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
         this.state.jacks.forEach(initJack);
 
         return (
-            <div className="rw-app">
+            <div className="rw-Rewire">
                 <h1>{this.props.heading}</h1>
-                <div className="rw-container"
+                <div className="rw-Rewire-container"
                     style={{ height: this.props.height, width: this.props.width }}
                     onMouseMove={this.state.onMouseMove}>
                     <WireContainer wires={this.state.wires}

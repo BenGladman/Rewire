@@ -1,6 +1,7 @@
 import * as React from "react";
-import * as Types from "../types";
-import Box from "./Box";
+import * as Types from "../../types";
+import Box from "../Box";
+import "./index.css";
 
 interface BoxContainerProps {
     boxes: Set<Types.BoxDefinition>;
@@ -14,7 +15,7 @@ export default function BoxContainer({boxes, activeBox}: BoxContainerProps) {
     };
 
     return (
-        <div className="rw-boxcontainer">
+        <div className="rw-BoxContainer">
             {boxEls}
         </div>
     );

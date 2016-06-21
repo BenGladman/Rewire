@@ -1,7 +1,8 @@
 import * as React from "react";
-import * as Types from "../types";
-import moveJack from "../actions/moveJack";
-import setMouseMove from "../actions/setMouseMove";
+import * as Types from "../../types";
+import moveJack from "../../actions/moveJack";
+import setMouseMove from "../../actions/setMouseMove";
+import "./index.css";
 
 interface JackProps {
     jack: Types.JackDefinition;
@@ -31,7 +32,7 @@ export default function Jack({jack}: JackProps) {
         angle: jack.angle || 0,
         size: 6,
         cprops: {
-            className: "rw-jack" + (jack.socket ? " rw-jack-connected" : ""),
+            className: "rw-Jack" + (jack.socket ? " is-connected" : ""),
             onMouseDown
         }
     });

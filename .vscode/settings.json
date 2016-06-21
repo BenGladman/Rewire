@@ -5,5 +5,13 @@
         "**/.DS_Store": true,
         "xxdist": true,
         "node_modules": true
+    },
+    "css.validate": false,
+    "stylelint.enable": true,
+    "stylelint.config": {
+        "extends": "stylelint-config-standard",
+        "rules": {
+            "indentation": 4
+        }
     }
 }

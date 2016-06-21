@@ -1,4 +1,5 @@
-import * as Types from "../types";
+import * as Types from "../../types";
+import "./index.css";
 
 interface SocketProps {
     socket: Types.SocketDefinition;
@@ -11,7 +12,7 @@ export default function Socket({socket}: SocketProps) {
         angle: socket.angle || 0,
         size: 6,
         cprops: {
-            className: "rw-socket"
+            className: "rw-Socket"
         }
     });
 };

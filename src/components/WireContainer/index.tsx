@@ -1,11 +1,12 @@
 import * as React from "react";
-import * as Types from "../types";
-import Bezier from "./Bezier";
-import Jack from "./Jack";
-import Socket from "./Socket";
-import addWire from "../actions/addWire";
-import moveJack from "../actions/moveJack";
-import setMouseMove from "../actions/setMouseMove";
+import * as Types from "../../types";
+import Wire from "../Wire";
+import Jack from "../Jack";
+import Socket from "../Socket";
+import addWire from "../../actions/addWire";
+import moveJack from "../../actions/moveJack";
+import setMouseMove from "../../actions/setMouseMove";
+import "./index.css";
 
 interface WireContainerProps {
     wires: Set<Types.WireDefinition>;
@@ -49,7 +50,7 @@ export default function WireContainer({wires, jacks, sockets}: WireContainerProp
     wires.forEach((wire, ix) => {
         const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
 
-        els.push(<Bezier key={wire.key} isConnected={isConnected}
+        els.push(<Wire key={wire.key} isConnected={isConnected}
             x1={wire.jack1.x} y1={wire.jack1.y} angle1={wire.jack1.angle}
             x2={wire.jack2.x} y2={wire.jack2.y} angle2={wire.jack2.angle} />);
     });
@@ -64,7 +65,7 @@ export default function WireContainer({wires, jacks, sockets}: WireContainerProp
     });
 
     return (
-        <svg className="rw-wirecontainer"
+        <svg className="rw-WireContainer"
             onMouseDown={onMouseDown}>
             {els}
         </svg>

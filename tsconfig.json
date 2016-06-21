@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"target": "es6",
 		"module": "none",
+		"moduleResolution": "node",
 		"jsx": "preserve",
 		"noImplicitAny": true,
 		"sourceMap": true,

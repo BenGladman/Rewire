@@ -1,8 +1,9 @@
 import * as React from "react";
-import * as Types from "../types";
-import moveBox from "../actions/moveBox";
-import setActiveBox from "../actions/setActiveBox";
-import setMouseMove from "../actions/setMouseMove";
+import * as Types from "../../types";
+import moveBox from "../../actions/moveBox";
+import setActiveBox from "../../actions/setActiveBox";
+import setMouseMove from "../../actions/setMouseMove";
+import "./index.css";
 
 interface BoxProps {
     box: Types.BoxDefinition;
@@ -36,12 +37,12 @@ export default function Box({box, isActive}: BoxProps) {
     };
 
     const headerEl = (box.title)
-        ? <h3 className="rw-boxheader">{box.title}</h3>
+        ? <h3 className="rw-Box-header">{box.title}</h3>
         : null;
 
 
     return (
-        <div className={"rw-box" + (isActive ? " rw-box-active" : "") }
+        <div className={"rw-Box" + (isActive ? " is-active" : "") }
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onMouseDown={onMouseDown}
