@@ -48,11 +48,7 @@ export default function WireContainer({wires, jacks, sockets}: WireContainerProp
     const els: JSX.Element[] = [];
 
     wires.forEach((wire, ix) => {
-        const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
-
-        els.push(<Wire key={wire.key} isConnected={isConnected}
-            x1={wire.jack1.x} y1={wire.jack1.y} angle1={wire.jack1.angle}
-            x2={wire.jack2.x} y2={wire.jack2.y} angle2={wire.jack2.angle} />);
+        els.push(<Wire key={wire.key} wire={wire} />);
     });
 
     sockets.forEach((socket) => {

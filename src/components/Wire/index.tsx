@@ -1,22 +1,20 @@
 import * as React from "react";
+import * as Types from "../../types";
 import "./index.css";
 
 const deg2rad = Math.PI / 180;
 
-interface BezierProps {
+interface WireProps {
     key: string;
-    x1: number;
-    y1: number;
-    angle1?: number;
-    x2: number;
-    y2: number;
-    angle2?: number;
+    wire: Types.WireDefinition;
     straightness?: number;
-    isConnected?: boolean;
 }
 
-export default function Wire({x1, y1, angle1 = 0, x2, y2, angle2 = 0, straightness = 100, isConnected}: BezierProps) {
+export default function Wire({ wire, straightness = 100}: WireProps) {
+    const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
     const className = "rw-Wire" + (isConnected ? " is-connected" : "");
+
+    const { jack1: {x: x1, y: y1, angle: angle1 }, jack2: {x: x2, y: y2, angle: angle2 }} = wire;
 
     const angle1rad = (angle1 * deg2rad);
     const angle2rad = (angle2 * deg2rad);
