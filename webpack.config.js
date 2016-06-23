@@ -1,9 +1,28 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var postcssImport = require('postcss-import');
-var postcssCustomProperties = require('postcss-custom-properties');
-var postcssColorFunction = require('postcss-color-function');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const postcssImport = require('postcss-import');
+const postcssCustomProperties = require('postcss-custom-properties');
+const postcssColorFunction = require('postcss-color-function');
+
+const includePath = [path.resolve(__dirname, "src")];
+
+const tsloaders = [
+    'babel-loader?' + JSON.stringify({
+        plugins: ["transform-runtime"],
+        presets: ["es2015"]
+    }),
+    'ts-loader'
+];
+
+const tsxloaders = [
+    'babel-loader?' + JSON.stringify({
+        plugins: ["transform-runtime"],
+        presets: ["es2015", "react"]
+    }),
+    'ts-loader'
+];
 
 module.exports = {
     entry: "./src/app.tsx",
@@ -22,14 +41,19 @@ module.exports = {
     module: {
         loaders: [
             {
-                // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-                test: /\.tsx?$/,
-                loader: 'babel-loader!ts-loader',
-                include: [path.resolve(__dirname, "src")]
+                test: /\.ts$/,
+                loaders: tsloaders,
+                include: includePath
+            },
+            {
+                test: /\.tsx$/,
+                loaders: tsxloaders,
+                include: includePath
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader'),
+                include: includePath
             }
         ],
 
@@ -41,7 +65,8 @@ module.exports = {
 
     plugins: [
         // This plugin moves all the CSS into a separate stylesheet
-        new ExtractTextPlugin('bundle.css')
+        new ExtractTextPlugin('bundle.css'),
+        new webpack.optimize.UglifyJsPlugin()
     ],
 
     postcss: [
