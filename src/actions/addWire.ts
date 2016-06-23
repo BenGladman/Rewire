@@ -4,7 +4,7 @@ import { getState, setState } from "../store";
 import { squareJackType, arrowJackType } from "../components/JackType";
 
 export default function (x1: number, y1: number, x2: number, y2: number) {
-    const { jacks, wires } = getState();
+    const { wires } = getState();
 
     const jack1: Types.JackDefinition = {
         key: nextKey(), x: x1, y: y1, type: squareJackType
@@ -20,8 +20,6 @@ export default function (x1: number, y1: number, x2: number, y2: number) {
         jack2
     };
 
-    jacks.add(jack1);
-    jacks.add(jack2);
     wires.add(wire);
     setState({});
 

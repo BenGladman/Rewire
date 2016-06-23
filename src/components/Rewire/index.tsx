@@ -11,8 +11,6 @@ interface RewireProps {
     height: number;
     width: number;
     initialBoxes?: Types.BoxDefinition[];
-    initialSockets?: Types.SocketDefinition[];
-    initialJacks?: Types.JackDefinition[];
     initialWires?: Types.WireDefinition[];
 }
 
@@ -21,11 +19,9 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
         super(props);
 
         const boxes = new Set(props.initialBoxes);
-        const sockets = new Set(props.initialSockets);
-        const jacks = new Set(props.initialJacks);
         const wires = new Set(props.initialWires);
 
-        this.state = { boxes, sockets, jacks, wires };
+        this.state = { boxes, wires };
 
         initialiseStore(
             () => this.state,
@@ -34,8 +30,8 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     }
 
     render() {
-        this.state.sockets.forEach(initSocket);
-        this.state.jacks.forEach(initJack);
+        this.state.boxes.forEach(initBoxSockets);
+        this.state.wires.forEach(initWireJacks);
 
         return (
             <div className="rw-Rewire">
@@ -44,8 +40,7 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
                     style={{ height: this.props.height, width: this.props.width }}
                     onMouseMove={this.state.onMouseMove}>
                     <WireContainer wires={this.state.wires}
-                        jacks={this.state.jacks}
-                        sockets={this.state.sockets} />
+                        boxes={this.state.boxes} />
                     <BoxContainer boxes={this.state.boxes}
                         activeBox={this.state.activeBox} />
                 </div>
@@ -55,40 +50,49 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     }
 }
 
-function initSocket(socket: Types.SocketDefinition) {
-    const box = socket.box;
-    if (box) {
-        const pos = socket.pos ? socket.pos + 0.5 : 0.5;
+const initBoxSockets = (box: Types.BoxDefinition) => {
+    box.sockets.forEach((socket) => initSocket(box, socket));
+};
 
-        switch (socket.side) {
-            case "top":
-                socket.angle = 180;
-                socket.x = (box.x + (pos * box.width));
-                socket.y = box.y;
-                break;
-            case "right":
-                socket.angle = 270;
-                socket.x = box.x + box.width;
-                socket.y = (box.y + (pos * box.height));
-                break;
-            case "bottom":
-                socket.angle = 0;
-                socket.x = (box.x + box.width - (pos * box.width));
-                socket.y = box.y + box.height;
-                break;
-            default:
-                socket.angle = 90;
-                socket.x = box.x;
-                socket.y = (box.y + box.height - (pos * box.height));
-                break;
-        }
+const initSocket = (box: Types.BoxDefinition, socket: Types.SocketDefinition) => {
+    const pos = socket.pos ? socket.pos + 0.5 : 0.5;
+
+    switch (socket.side) {
+        case "top":
+            socket.angle = 180;
+            socket.x = (box.x + (pos * box.width));
+            socket.y = box.y;
+            break;
+        case "right":
+            socket.angle = 270;
+            socket.x = box.x + box.width;
+            socket.y = (box.y + (pos * box.height));
+            break;
+        case "bottom":
+            socket.angle = 0;
+            socket.x = (box.x + box.width - (pos * box.width));
+            socket.y = box.y + box.height;
+            break;
+        default:
+            socket.angle = 90;
+            socket.x = box.x;
+            socket.y = (box.y + box.height - (pos * box.height));
+            break;
     }
-}
+};
 
-function initJack (jack: Types.JackDefinition) {
+const initWireJacks = (wire: Types.WireDefinition) => {
+    initJack(wire.jack1);
+    initJack(wire.jack2);
+};
+
+const initJack = (jack: Types.JackDefinition) => {
     if (jack.socket) {
         jack.x = jack.socket.x;
         jack.y = jack.socket.y;
         jack.angle = jack.socket.angle;
     }
-}
+    if (jack.x === undefined) { jack.x = 0; }
+    if (jack.y === undefined) { jack.y = 0; }
+    if (jack.angle === undefined) { jack.angle = 0; }
+};

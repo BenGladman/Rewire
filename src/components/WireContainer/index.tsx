@@ -10,11 +10,10 @@ import "./index.css";
 
 interface WireContainerProps {
     wires: Set<Types.WireDefinition>;
-    jacks: Set<Types.JackDefinition>;
-    sockets: Set<Types.SocketDefinition>;
+    boxes: Set<Types.BoxDefinition>;
 }
 
-export default function WireContainer({wires, jacks, sockets}: WireContainerProps) {
+export default function WireContainer({ wires, boxes }: WireContainerProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -47,17 +46,19 @@ export default function WireContainer({wires, jacks, sockets}: WireContainerProp
 
     const els: JSX.Element[] = [];
 
-    wires.forEach((wire, ix) => {
+    wires.forEach((wire) => {
         els.push(<Wire key={wire.key} wire={wire} />);
     });
 
-    sockets.forEach((socket) => {
-        els.push(<Socket key={socket.key} socket={socket} />);
+    boxes.forEach((box) => {
+        box.sockets.forEach((socket) => {
+            els.push(<Socket key={socket.key} socket={socket} />);
+        });
     });
 
-
-    jacks.forEach((jack) => {
-        els.push(<Jack key={jack.key} jack={jack} />);
+    wires.forEach((wire) => {
+        els.push(<Jack key={wire.jack1.key} jack={wire.jack1} />);
+        els.push(<Jack key={wire.jack2.key} jack={wire.jack2} />);
     });
 
     return (

@@ -10,6 +10,7 @@ export interface BoxDefinition {
     width: number;
     height: number;
     content: JSX.Element;
+    sockets: SocketDefinition[];
 }
 
 export interface JackTypeProps {
@@ -29,7 +30,6 @@ export type JackType = (props: JackTypeProps) => JSX.Element;
 
 export interface SocketDefinition {
     key: string;
-    box: BoxDefinition;
     side: BoxSide;
     pos: number;
     x?: number;
@@ -55,8 +55,6 @@ export interface WireDefinition {
 
 export interface State {
     boxes?: Set<BoxDefinition>;
-    sockets?: Set<SocketDefinition>;
-    jacks?: Set<JackDefinition>;
     wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
     activeBox?: BoxDefinition;

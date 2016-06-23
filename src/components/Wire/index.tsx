@@ -14,7 +14,7 @@ export default function Wire({ wire, straightness = 100}: WireProps) {
     const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
     const className = "rw-Wire" + (isConnected ? " is-connected" : "");
 
-    const { jack1: {x: x1, y: y1, angle: angle1 }, jack2: {x: x2, y: y2, angle: angle2 }} = wire;
+    const { jack1: {x: x1, y: y1, angle: angle1 = 0 }, jack2: {x: x2, y: y2, angle: angle2 = 0 }} = wire;
 
     const angle1rad = (angle1 * deg2rad);
     const angle2rad = (angle2 * deg2rad);
