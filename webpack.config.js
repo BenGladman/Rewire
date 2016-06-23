@@ -65,8 +65,8 @@ module.exports = {
 
     plugins: [
         // This plugin moves all the CSS into a separate stylesheet
-        new ExtractTextPlugin('bundle.css'),
-        new webpack.optimize.UglifyJsPlugin()
+        new ExtractTextPlugin('bundle.css')
+        //, new webpack.optimize.UglifyJsPlugin()
     ],
 
     postcss: [
