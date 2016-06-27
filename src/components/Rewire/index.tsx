@@ -4,6 +4,7 @@ import { initialiseStore } from "../../store";
 import BoxContainer from "../BoxContainer";
 import WireContainer from "../WireContainer";
 import clearAll from "../../actions/clearAll";
+import nextKey from "../../util/nextKey";
 import "./index.css";
 
 interface RewireProps {
@@ -30,8 +31,8 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     }
 
     render() {
-        this.state.boxes.forEach(initBoxSockets);
-        this.state.wires.forEach(initWireJacks);
+        this.state.boxes.forEach(initBox);
+        this.state.wires.forEach(initWire);
 
         return (
             <div className="rw-Rewire">
@@ -50,11 +51,14 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     }
 }
 
-const initBoxSockets = (box: Types.BoxDefinition) => {
+const initBox = (box: Types.BoxDefinition) => {
+    if (!box.key) { box.key = nextKey(); }
     box.sockets.forEach((socket) => initSocket(box, socket));
 };
 
 const initSocket = (box: Types.BoxDefinition, socket: Types.SocketDefinition) => {
+    if (!socket.key) { socket.key = nextKey(); }
+
     const pos = socket.pos ? socket.pos + 0.5 : 0.5;
 
     switch (socket.side) {
@@ -81,12 +85,16 @@ const initSocket = (box: Types.BoxDefinition, socket: Types.SocketDefinition) =>
     }
 };
 
-const initWireJacks = (wire: Types.WireDefinition) => {
+const initWire = (wire: Types.WireDefinition) => {
+    if (!wire.key) { wire.key = nextKey(); }
+
     initJack(wire.jack1);
     initJack(wire.jack2);
 };
 
 const initJack = (jack: Types.JackDefinition) => {
+    if (!jack.key) { jack.key = nextKey(); }
+
     if (jack.socket) {
         jack.x = jack.socket.x;
         jack.y = jack.socket.y;

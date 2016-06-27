@@ -3,7 +3,7 @@ import * as React from "react";
 export type BoxSide = "top" | "right" | "bottom" | "left";
 
 export interface BoxDefinition {
-    key: string;
+    key?: string;
     title?: string;
     x: number;
     y: number;
@@ -29,7 +29,7 @@ export interface JackTypeProps {
 export type JackType = (props: JackTypeProps) => JSX.Element;
 
 export interface SocketDefinition {
-    key: string;
+    key?: string;
     side: BoxSide;
     pos: number;
     x?: number;
@@ -39,7 +39,7 @@ export interface SocketDefinition {
 }
 
 export interface JackDefinition {
-    key: string;
+    key?: string;
     socket?: SocketDefinition;
     x?: number;
     y?: number;
@@ -48,7 +48,7 @@ export interface JackDefinition {
 }
 
 export interface WireDefinition {
-    key: string;
+    key?: string;
     jack1: JackDefinition;
     jack2: JackDefinition;
 }
