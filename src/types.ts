@@ -58,4 +58,5 @@ export interface State {
     wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
     activeBox?: BoxDefinition;
+    animatingJack?: JackDefinition;
 }

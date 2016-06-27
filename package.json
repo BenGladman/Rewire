@@ -11,7 +11,8 @@
   "dependencies": {
     "babel-runtime": "^6.9.2",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-motion": "^0.4.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

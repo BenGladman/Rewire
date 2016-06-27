@@ -11,9 +11,10 @@ import "./index.css";
 interface WireContainerProps {
     wires: Set<Types.WireDefinition>;
     boxes: Set<Types.BoxDefinition>;
+    animatingJack: Types.JackDefinition;
 }
 
-export default function WireContainer({ wires, boxes }: WireContainerProps) {
+export default function WireContainer({ wires, boxes, animatingJack }: WireContainerProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -47,7 +48,7 @@ export default function WireContainer({ wires, boxes }: WireContainerProps) {
     const els: JSX.Element[] = [];
 
     wires.forEach((wire) => {
-        els.push(<Wire key={wire.key} wire={wire} />);
+        els.push(<Wire key={wire.key} wire={wire} animatingJack={animatingJack} />);
     });
 
     boxes.forEach((box) => {
@@ -57,8 +58,8 @@ export default function WireContainer({ wires, boxes }: WireContainerProps) {
     });
 
     wires.forEach((wire) => {
-        els.push(<Jack key={wire.jack1.key} jack={wire.jack1} />);
-        els.push(<Jack key={wire.jack2.key} jack={wire.jack2} />);
+        els.push(<Jack key={wire.jack1.key} jack={wire.jack1} isAnimating={wire.jack1 === animatingJack} />);
+        els.push(<Jack key={wire.jack2.key} jack={wire.jack2} isAnimating={wire.jack2 === animatingJack} />);
     });
 
     return (
