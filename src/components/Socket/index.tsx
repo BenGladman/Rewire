@@ -2,6 +2,7 @@ import * as Types from "../../types";
 import "./index.css";
 
 interface SocketProps {
+    key: string;
     socket: Types.SocketDefinition;
 }
 

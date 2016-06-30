@@ -6,6 +6,7 @@ import setMouseMove from "../../actions/setMouseMove";
 import "./index.css";
 
 interface BoxProps {
+    key: string;
     box: Types.BoxDefinition;
     isActive: boolean;
 }

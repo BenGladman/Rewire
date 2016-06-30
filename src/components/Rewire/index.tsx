@@ -5,6 +5,7 @@ import BoxContainer from "../BoxContainer";
 import WireContainer from "../WireContainer";
 import clearAll from "../../actions/clearAll";
 import nextKey from "../../util/nextKey";
+import mod from "../../util/mod";
 import "./index.css";
 
 interface RewireProps {
@@ -99,8 +100,21 @@ const initJack = (jack: Types.JackDefinition) => {
     if (jack.socket) {
         jack.x = jack.socket.x;
         jack.y = jack.socket.y;
-        jack.angle = jack.socket.angle;
+
+        const origangle = jack.angle | 0;
+        const newangle = jack.socket.angle;
+        let changeangle = newangle - mod(origangle, 360);
+        if (changeangle > 180) {
+            changeangle -= 360;
+        } else if (changeangle < -180) {
+            changeangle += 360;
+        }
+        if (changeangle !== 0) {
+            // console.debug(`o=${origangle} c=${changeangle} n=${origangle + changeangle}`);
+            jack.angle = origangle + changeangle;
+        }
     }
+
     if (jack.x === undefined) { jack.x = 0; }
     if (jack.y === undefined) { jack.y = 0; }
     if (jack.angle === undefined) { jack.angle = 0; }

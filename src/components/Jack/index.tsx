@@ -6,6 +6,7 @@ import setMouseMove from "../../actions/setMouseMove";
 import "./index.css";
 
 interface JackProps {
+    key: string;
     jack: Types.JackDefinition;
     isAnimating: boolean;
 }
