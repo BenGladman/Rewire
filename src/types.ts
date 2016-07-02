@@ -57,6 +57,8 @@ export interface State {
     boxes?: Set<BoxDefinition>;
     wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;
+    onTouchMove?: (ev: React.TouchEvent) => void;
+    onTouchEnd?: (ev: React.TouchEvent) => void;
     activeBox?: BoxDefinition;
     animatingJack?: JackDefinition;
 }

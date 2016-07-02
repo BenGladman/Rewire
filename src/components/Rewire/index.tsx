@@ -40,7 +40,9 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
                 <h1>{this.props.heading}</h1>
                 <div className="rw-Rewire-container"
                     style={{ height: this.props.height, width: this.props.width }}
-                    onMouseMove={this.state.onMouseMove}>
+                    onMouseMove={this.state.onMouseMove}
+                    onTouchMove={this.state.onTouchMove}
+                    onTouchEnd={this.state.onTouchEnd}>
                     <WireContainer wires={this.state.wires}
                         boxes={this.state.boxes}
                         animatingJack={this.state.animatingJack} />
