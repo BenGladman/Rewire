@@ -11,7 +11,7 @@
     stroke: var(--rw-connectedDarkColor);
 }
 
-.rw-Jack:hover {
+.rw-Jack.is-active {
     fill: var(--rw-activeColor);
     stroke: var(--rw-activeDarkColor);
 }

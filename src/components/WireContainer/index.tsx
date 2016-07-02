@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Types from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
 import Wire from "../Wire";
 import Jack from "../Jack";
 import Socket from "../Socket";
@@ -9,12 +9,14 @@ import setMouseMove from "../../actions/setMouseMove";
 import "./index.css";
 
 interface WireContainerProps {
-    wires: Set<Types.WireDefinition>;
-    boxes: Set<Types.BoxDefinition>;
-    animatingJack: Types.JackDefinition;
+    wires: Set<WireDefinition>;
+    boxes: Set<BoxDefinition>;
+    activeWire: WireDefinition;
+    activeJack: JackDefinition;
+    animatingJack: JackDefinition;
 }
 
-export default function WireContainer({ wires, boxes, animatingJack }: WireContainerProps) {
+export default function WireContainer({ wires, boxes, activeWire, activeJack, animatingJack }: WireContainerProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -22,7 +24,7 @@ export default function WireContainer({ wires, boxes, animatingJack }: WireConta
             const x1 = ev.pageX - bounds.left;
             const y1 = ev.pageY - bounds.top;
 
-            let addedWire: Types.WireDefinition = null;
+            let addedWire: WireDefinition = null;
 
             const onMouseMove = (ev: React.MouseEvent) => {
                 const x2 = ev.pageX - bounds.left;
@@ -48,7 +50,7 @@ export default function WireContainer({ wires, boxes, animatingJack }: WireConta
     const els: JSX.Element[] = [];
 
     wires.forEach((wire) => {
-        els.push(<Wire key={wire.key} wire={wire} animatingJack={animatingJack} />);
+        els.push(<Wire key={wire.key} wire={wire} isActive={wire === activeWire} animatingJack={animatingJack} />);
     });
 
     boxes.forEach((box) => {
@@ -58,8 +60,10 @@ export default function WireContainer({ wires, boxes, animatingJack }: WireConta
     });
 
     wires.forEach((wire) => {
-        els.push(<Jack key={wire.jack1.key} jack={wire.jack1} isAnimating={wire.jack1 === animatingJack} />);
-        els.push(<Jack key={wire.jack2.key} jack={wire.jack2} isAnimating={wire.jack2 === animatingJack} />);
+        els.push(<Jack key={wire.jack1.key} jack={wire.jack1} wire={wire}
+            isActive={wire.jack1 === activeJack} isAnimating={wire.jack1 === animatingJack} />);
+        els.push(<Jack key={wire.jack2.key} jack={wire.jack2} wire={wire}
+            isActive={wire.jack2 === activeJack} isAnimating={wire.jack2 === animatingJack} />);
     });
 
     return (

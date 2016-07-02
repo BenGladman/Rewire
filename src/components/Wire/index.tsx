@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
 import * as Types from "../../types";
+import setActiveWire from "../../actions/setActiveWire";
 import "./index.css";
 
 const deg2rad = Math.PI / 180;
@@ -9,12 +10,23 @@ interface WireProps {
     key: string;
     wire: Types.WireDefinition;
     straightness?: number;
+    isActive: boolean;
     animatingJack: Types.JackDefinition;
 }
 
-export default function Wire({ wire, straightness = 100, animatingJack }: WireProps) {
+export default function Wire({ wire, straightness = 100, isActive, animatingJack }: WireProps) {
+    const onMouseEnter = (ev: React.MouseEvent) => {
+        setActiveWire(wire);
+    };
+
+    const onMouseLeave = (ev: React.MouseEvent) => {
+        setActiveWire(null);
+    };
+
     const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
-    const className = "rw-Wire" + (isConnected ? " is-connected" : "");
+    const className = "rw-Wire"
+        + (isConnected ? " is-connected" : "")
+        + (isActive ? " is-active" : "");
 
     const { jack1: {x: x1 = 0, y: y1 = 0, angle: angle1 = 0 }, jack2: {x: x2 = 0, y: y2 = 0, angle: angle2 = 0 }} = wire;
 
@@ -28,12 +40,14 @@ export default function Wire({ wire, straightness = 100, animatingJack }: WirePr
         const c2y = (y2 + straightness * Math.cos(angle2rad));
         const path = `M${x1} ${y1} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${x2} ${y2}`;
 
-        return <path className={className} d={path} />;
+        return <path className={className} d={path}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave} />;
     };
 
     const jack1a = wire.jack1 === animatingJack;
     const jack2a = wire.jack2 === animatingJack;
-    if ( jack1a || jack2a ) {
+    if (jack1a || jack2a) {
         const springConfig = { stiffness: 300, damping: 50 };
         const style = {
             x1: jack1a ? spring(x1, springConfig) : x1,

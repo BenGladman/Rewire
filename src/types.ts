@@ -62,5 +62,7 @@ export interface State {
     onTouchMove?: (ev: React.TouchEvent) => void;
     onTouchEnd?: (ev: React.TouchEvent) => void;
     activeBox?: BoxDefinition;
+    activeWire?: WireDefinition;
+    activeJack?: JackDefinition;
     animatingJack?: JackDefinition;
 }

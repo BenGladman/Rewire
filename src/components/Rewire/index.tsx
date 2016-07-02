@@ -46,6 +46,8 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
                     onTouchEnd={this.state.onTouchEnd}>
                     <WireContainer wires={this.state.wires}
                         boxes={this.state.boxes}
+                        activeWire={this.state.activeWire}
+                        activeJack={this.state.activeJack}
                         animatingJack={this.state.animatingJack} />
                     <BoxContainer boxes={this.state.boxes}
                         activeBox={this.state.activeBox} />

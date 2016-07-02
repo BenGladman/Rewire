@@ -7,5 +7,9 @@
 }
 
 .rw-Wire.is-connected {
-    stroke: var(--rw-activeDarkColor);
+    stroke: var(--rw-connectedDarkColor);
+}
+
+.rw-Wire.is-active {
+    stroke: var(--rw-activeColor);
 }
