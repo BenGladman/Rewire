@@ -1,9 +1,11 @@
+@import "../../base.css";
+
 .rw-Wire {
     fill: transparent;
-    stroke: hsl(230, 30%, 20%);
-    stroke-width: 3;
+    stroke: var(--rw-baseDarkColor);
+    stroke-width: var(--rw-lineWidth);
 }
 
 .rw-Wire.is-connected {
-    stroke: hsl(60, 60%, 20%);
+    stroke: var(--rw-activeDarkColor);
 }

@@ -1,17 +1,19 @@
+@import "../../base.css";
+
 .rw-Box {
-    background: hsl(230, 30%, 99%);
-    border: 1px solid hsl(230, 30%, 20%);
+    background: var(--rw-baseLightColor);
+    border: 1px solid var(--rw-baseDarkColor);
     box-sizing: border-box;
     position: absolute;
 }
 
 .rw-Box.is-active {
-    border: 1px solid hsl(60, 50%, 50%);
+    border: 1px solid var(--rw-activeColor);
 }
 
 .rw-Box-header {
-    background: hsl(230, 30%, 20%);
-    color: hsl(230, 30%, 98%);
+    background: var(--rw-baseDarkColor);
+    color: var(--rw-baseLightColor);
     font-size: 0.6rem;
     font-weight: normal;
     margin: 0;
