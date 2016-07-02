@@ -54,6 +54,8 @@ export interface WireDefinition {
 }
 
 export interface State {
+    width?: number;
+    height?: number;
     boxes?: Set<BoxDefinition>;
     wires?: Set<WireDefinition>;
     onMouseMove?: (ev: React.MouseEvent) => void;

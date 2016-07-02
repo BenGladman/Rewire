@@ -5,7 +5,7 @@ import BoxContainer from "../BoxContainer";
 import WireContainer from "../WireContainer";
 import clearAll from "../../actions/clearAll";
 import nextKey from "../../util/nextKey";
-import mod from "../../util/mod";
+import { mod } from "../../util/mathUtil";
 import "./index.css";
 
 interface RewireProps {
@@ -20,10 +20,11 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     constructor(props: RewireProps) {
         super(props);
 
+        const { width, height } = props;
         const boxes = new Set(props.initialBoxes);
         const wires = new Set(props.initialWires);
 
-        this.state = { boxes, wires };
+        this.state = { width, height, boxes, wires };
 
         initialiseStore(
             () => this.state,
@@ -39,7 +40,7 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
             <div className="rw-Rewire">
                 <h1>{this.props.heading}</h1>
                 <div className="rw-Rewire-container"
-                    style={{ height: this.props.height, width: this.props.width }}
+                    style={{ height: this.state.height, width: this.state.width }}
                     onMouseMove={this.state.onMouseMove}
                     onTouchMove={this.state.onTouchMove}
                     onTouchEnd={this.state.onTouchEnd}>
