@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
-import * as Types from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
 import setActiveWire from "../../actions/setActiveWire";
 import "./index.css";
 
@@ -8,19 +8,19 @@ const deg2rad = Math.PI / 180;
 
 interface WireProps {
     key: string;
-    wire: Types.WireDefinition;
+    wire: WireDefinition;
     straightness?: number;
     isActive: boolean;
-    animatingJack: Types.JackDefinition;
+    movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function Wire({ wire, straightness = 100, isActive, animatingJack }: WireProps) {
+export default function Wire({ wire, straightness = 100, isActive, movingItem }: WireProps) {
     const onMouseEnter = (ev: React.MouseEvent) => {
-        setActiveWire(wire);
+        if (!movingItem) { setActiveWire(wire); }
     };
 
     const onMouseLeave = (ev: React.MouseEvent) => {
-        setActiveWire(null);
+        if (!movingItem) { setActiveWire(null); }
     };
 
     const isConnected = !!wire.jack1.socket && !!wire.jack2.socket;
@@ -45,8 +45,8 @@ export default function Wire({ wire, straightness = 100, isActive, animatingJack
             onMouseLeave={onMouseLeave} />;
     };
 
-    const jack1a = wire.jack1 === animatingJack;
-    const jack2a = wire.jack2 === animatingJack;
+    const jack1a = wire.jack1 === movingItem;
+    const jack2a = wire.jack2 === movingItem;
     if (jack1a || jack2a) {
         const springConfig = { stiffness: 300, damping: 50 };
         const style = {

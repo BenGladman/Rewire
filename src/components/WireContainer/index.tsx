@@ -1,11 +1,12 @@
 import * as React from "react";
-import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition, mouseHandler } from "../../types";
 import Wire from "../Wire";
 import Jack from "../Jack";
 import Socket from "../Socket";
 import addWire from "../../actions/addWire";
 import moveJack from "../../actions/moveJack";
 import setMouseMove from "../../actions/setMouseMove";
+import setMovingItem from "../../actions/setMovingItem";
 import "./index.css";
 
 interface WireContainerProps {
@@ -13,10 +14,10 @@ interface WireContainerProps {
     boxes: Set<BoxDefinition>;
     activeWire: WireDefinition;
     activeJack: JackDefinition;
-    animatingJack: JackDefinition;
+    movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function WireContainer({ wires, boxes, activeWire, activeJack, animatingJack }: WireContainerProps) {
+export default function WireContainer({ wires, boxes, activeWire, activeJack, movingItem }: WireContainerProps) {
     const onMouseDown = (ev: React.MouseEvent) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -26,7 +27,7 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, an
 
             let addedWire: WireDefinition = null;
 
-            const onMouseMove = (ev: React.MouseEvent) => {
+            const onMouseMove: mouseHandler = (ev) => {
                 const x2 = ev.pageX - bounds.left;
                 const y2 = ev.pageY - bounds.top;
 
@@ -34,13 +35,18 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, an
                     const distTrigger = 20;
                     if (Math.abs(x2 - x1) > distTrigger || Math.abs(y2 - y1) > distTrigger) {
                         addedWire = addWire(x1, y1, x2, y2);
+                        setMovingItem(null, addedWire, addedWire.jack2);
                     }
                 } else {
                     moveJack(addedWire.jack2, x2, y2);
                 }
             };
 
-            setMouseMove(onMouseMove);
+            const onMouseUp: mouseHandler = (ev) => {
+                setMovingItem(null, null, null);
+            };
+
+            setMouseMove(onMouseMove, onMouseUp);
         }
 
         // prevent text selection
@@ -50,7 +56,7 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, an
     const els: JSX.Element[] = [];
 
     wires.forEach((wire) => {
-        els.push(<Wire key={wire.key} wire={wire} isActive={wire === activeWire} animatingJack={animatingJack} />);
+        els.push(<Wire key={wire.key} wire={wire} isActive={wire === activeWire} movingItem={movingItem} />);
     });
 
     boxes.forEach((box) => {
@@ -61,9 +67,9 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, an
 
     wires.forEach((wire) => {
         els.push(<Jack key={wire.jack1.key} jack={wire.jack1} wire={wire}
-            isActive={wire.jack1 === activeJack} isAnimating={wire.jack1 === animatingJack} />);
+            isActive={wire.jack1 === activeJack} movingItem={movingItem} />);
         els.push(<Jack key={wire.jack2.key} jack={wire.jack2} wire={wire}
-            isActive={wire.jack2 === activeJack} isAnimating={wire.jack2 === animatingJack} />);
+            isActive={wire.jack2 === activeJack} movingItem={movingItem} />);
     });
 
     return (

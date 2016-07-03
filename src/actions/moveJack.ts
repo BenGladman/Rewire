@@ -28,5 +28,5 @@ export default function (jack: Types.JackDefinition, x: number, y: number) {
         jack.y = y;
     }
 
-    setState({ animatingJack: jack });
+    setState({});
 };

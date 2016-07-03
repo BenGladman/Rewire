@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
-import { WireDefinition, JackDefinition } from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition, mouseHandler } from "../../types";
 import moveJack from "../../actions/moveJack";
 import setMouseMove from "../../actions/setMouseMove";
 import setActiveWire from "../../actions/setActiveWire";
 import setActiveJack from "../../actions/setActiveJack";
+import setMovingItem from "../../actions/setMovingItem";
 import "./index.css";
 
 interface JackProps {
@@ -12,33 +13,41 @@ interface JackProps {
     jack: JackDefinition;
     wire: WireDefinition;
     isActive: boolean;
-    isAnimating: boolean;
+    movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function Jack({ jack, wire, isActive, isAnimating }: JackProps) {
-    const onMouseEnter = (ev: React.MouseEvent) => {
-        setActiveJack(jack);
-        setActiveWire(wire);
+export default function Jack({ jack, wire, isActive, movingItem }: JackProps) {
+    const onMouseEnter: mouseHandler = (ev) => {
+        if (!movingItem) {
+            setActiveJack(jack);
+            setActiveWire(wire);
+        }
     };
 
-    const onMouseLeave = (ev: React.MouseEvent) => {
-        setActiveJack(null);
-        setActiveWire(null);
+    const onMouseLeave: mouseHandler = (ev) => {
+        if (!movingItem) {
+            setActiveJack(null);
+            setActiveWire(null);
+        }
     };
 
-    const onMouseDown = (ev: React.MouseEvent) => {
+    const onMouseDown: mouseHandler = (ev) => {
         const offsetX = jack.x - ev.pageX;
         const offsetY = jack.y - ev.pageY;
 
-        const onMouseMove = (ev: React.MouseEvent) => {
+        const onMouseMove: mouseHandler = (ev) => {
             moveJack(jack, ev.pageX + offsetX, ev.pageY + offsetY);
         };
 
-        setMouseMove(onMouseMove);
+        const onMouseUp: mouseHandler = (ev) => {
+            setMovingItem(null, null, null);
+        };
+
+        setMovingItem(null, wire, jack);
+        setMouseMove(onMouseMove, onMouseUp);
 
         // don't trigger on container
         ev.stopPropagation();
-
         // prevent text selection
         ev.preventDefault();
     };
@@ -57,7 +66,7 @@ export default function Jack({ jack, wire, isActive, isAnimating }: JackProps) {
         }
     }));
 
-    if (isAnimating) {
+    if (jack === movingItem) {
         const springConfig = { stiffness: 300, damping: 50 };
         const style = {
             x: spring(jack.x, springConfig),

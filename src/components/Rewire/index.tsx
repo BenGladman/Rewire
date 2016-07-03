@@ -42,15 +42,17 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
                 <div className="rw-Rewire-container"
                     style={{ height: this.state.height, width: this.state.width }}
                     onMouseMove={this.state.onMouseMove}
+                    onMouseUp={this.state.onMouseUp}
                     onTouchMove={this.state.onTouchMove}
                     onTouchEnd={this.state.onTouchEnd}>
                     <WireContainer wires={this.state.wires}
                         boxes={this.state.boxes}
                         activeWire={this.state.activeWire}
                         activeJack={this.state.activeJack}
-                        animatingJack={this.state.animatingJack} />
+                        movingItem={this.state.movingItem} />
                     <BoxContainer boxes={this.state.boxes}
-                        activeBox={this.state.activeBox} />
+                        activeBox={this.state.activeBox}
+                        movingItem={this.state.movingItem} />
                 </div>
                 <button onClick={clearAll}>Clear All</button>
             </div>

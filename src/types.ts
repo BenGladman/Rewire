@@ -53,16 +53,20 @@ export interface WireDefinition {
     jack2: JackDefinition;
 }
 
+export type mouseHandler = (ev: React.MouseEvent) => void;
+export type touchHandler = (ev: React.TouchEvent) => void;
+
 export interface State {
     width?: number;
     height?: number;
     boxes?: Set<BoxDefinition>;
     wires?: Set<WireDefinition>;
-    onMouseMove?: (ev: React.MouseEvent) => void;
-    onTouchMove?: (ev: React.TouchEvent) => void;
-    onTouchEnd?: (ev: React.TouchEvent) => void;
+    onMouseMove?: mouseHandler;
+    onMouseUp?: mouseHandler;
+    onTouchMove?: touchHandler;
+    onTouchEnd?: touchHandler;
     activeBox?: BoxDefinition;
     activeWire?: WireDefinition;
     activeJack?: JackDefinition;
-    animatingJack?: JackDefinition;
+    movingItem?: BoxDefinition | JackDefinition;
 }
