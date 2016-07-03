@@ -1,5 +1,8 @@
 import * as React from "react";
 
+export type mouseHandler = (ev: React.MouseEvent) => void;
+export type touchHandler = (ev: React.TouchEvent) => void;
+
 export type BoxSide = "top" | "right" | "bottom" | "left";
 
 export interface BoxDefinition {
@@ -20,9 +23,9 @@ export interface JackTypeProps {
     size: number;
     cprops: {
         className?: string;
-        onMouseDown?: (ev: React.MouseEvent) => void;
-        onMouseEnter?: (ev: React.MouseEvent) => void;
-        onMouseLeave?: (ev: React.MouseEvent) => void;
+        onMouseDown?: mouseHandler;
+        onMouseEnter?: mouseHandler;
+        onMouseLeave?: mouseHandler;
     };
 }
 
@@ -52,9 +55,6 @@ export interface WireDefinition {
     jack1: JackDefinition;
     jack2: JackDefinition;
 }
-
-export type mouseHandler = (ev: React.MouseEvent) => void;
-export type touchHandler = (ev: React.TouchEvent) => void;
 
 export interface State {
     width?: number;

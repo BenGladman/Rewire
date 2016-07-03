@@ -18,7 +18,7 @@ interface WireContainerProps {
 }
 
 export default function WireContainer({ wires, boxes, activeWire, activeJack, movingItem }: WireContainerProps) {
-    const onMouseDown = (ev: React.MouseEvent) => {
+    const onMouseDown: mouseHandler = (ev) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
             const bounds = target.getBoundingClientRect();
