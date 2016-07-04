@@ -4,6 +4,7 @@
     background: var(--rw-baseLightColor);
     border: 1px solid var(--rw-baseDarkColor);
     box-sizing: border-box;
+    overflow: hidden;
     position: absolute;
 }
 

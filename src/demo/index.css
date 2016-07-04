@@ -1,0 +1,18 @@
+@import "../base.css";
+
+.demo-h1 {
+    background: var(--rw-baseDarkColor);
+    color: var(--rw-baseLightColor);
+    font-size: 2rem;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.demo-p {
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
