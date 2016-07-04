@@ -60,17 +60,48 @@
 	    ),
 	    sockets: [{ side: "left", pos: -0.2, type: JackType_1.squareJackType }, { side: "right", pos: 0.2, type: JackType_1.squareJackType }, { side: "bottom", pos: 0, type: JackType_1.circleJackType }]
 	}, {
-	    x: 50, y: 50, width: 100, height: 100,
+	    x: 50, y: 60, width: 100, height: 100,
 	    content: React.createElement(
 	        "p",
 	        { className: "demo-p" },
 	        "A wiring UI written in React and Typescript"
 	    ),
 	    sockets: [{ side: "right", pos: 0, type: JackType_1.arrowJackType }]
+	}, {
+	    x: 400, y: 250, width: 80, height: 80,
+	    content: React.createElement(
+	        "p",
+	        { className: "demo-p" },
+	        "By",
+	        React.createElement("br", null),
+	        "Ben",
+	        React.createElement("br", null),
+	        "Gladman"
+	    ),
+	    sockets: [{ side: "top", pos: 0, type: JackType_1.circleJackType }]
+	}, {
+	    x: 80, y: 300, width: 180, height: 40,
+	    content: React.createElement(
+	        "p",
+	        { className: "demo-p" },
+	        "View source on ",
+	        React.createElement(
+	            "a",
+	            { href: "https://github.com/BenGladman/Rewire" },
+	            "GitHub"
+	        )
+	    ),
+	    sockets: [{ side: "top", pos: -0.4, type: JackType_1.circleJackType }]
 	}];
 	var initialWires = [{
 	    jack1: { socket: initialBoxes[0].sockets[0], type: JackType_1.squareJackType },
 	    jack2: { socket: initialBoxes[1].sockets[0], type: JackType_1.arrowJackType }
+	}, {
+	    jack1: { socket: initialBoxes[0].sockets[1], type: JackType_1.squareJackType },
+	    jack2: { socket: initialBoxes[2].sockets[0], type: JackType_1.circleJackType }
+	}, {
+	    jack1: { socket: initialBoxes[0].sockets[2], type: JackType_1.circleJackType },
+	    jack2: { socket: initialBoxes[3].sockets[0], type: JackType_1.circleJackType }
 	}];
 	var initData = {
 	    height: 600,
