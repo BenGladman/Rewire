@@ -22,14 +22,14 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, mo
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
             const bounds = target.getBoundingClientRect();
-            const x1 = ev.pageX - bounds.left;
-            const y1 = ev.pageY - bounds.top;
+            const x1 = ev.clientX - bounds.left;
+            const y1 = ev.clientY - bounds.top;
 
             let addedWire: WireDefinition = null;
 
             const onMouseMove: mouseHandler = (ev) => {
-                const x2 = ev.pageX - bounds.left;
-                const y2 = ev.pageY - bounds.top;
+                const x2 = ev.clientX - bounds.left;
+                const y2 = ev.clientY - bounds.top;
 
                 if (addedWire === null) {
                     const distTrigger = 20;
