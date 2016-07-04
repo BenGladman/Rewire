@@ -63,10 +63,6 @@ export default function Box({ box, isActive, movingBox }: BoxProps) {
         ev.preventDefault();
     };
 
-    const headerEl = (box.title)
-        ? <h3 className="rw-Box-header">{box.title}</h3>
-        : null;
-
     return (
         <div className={"rw-Box" + (isActive ? " is-active" : "") }
             onMouseEnter={onMouseEnter}
@@ -74,7 +70,6 @@ export default function Box({ box, isActive, movingBox }: BoxProps) {
             onMouseDown={onMouseDown}
             onTouchStart={onTouchStart}
             style={{ left: box.x, top: box.y, width: box.width, height: box.height }}>
-            {headerEl}
             {box.content}
         </div>
     );

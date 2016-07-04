@@ -9,7 +9,6 @@ import { mod } from "../../util/mathUtil";
 import "./index.css";
 
 interface RewireProps {
-    heading: string;
     height: number;
     width: number;
     initialBoxes?: Types.BoxDefinition[];
@@ -38,7 +37,6 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
 
         return (
             <div className="rw-Rewire">
-                <h1>{this.props.heading}</h1>
                 <div className="rw-Rewire-container"
                     style={{ height: this.state.height, width: this.state.width }}
                     onMouseMove={this.state.onMouseMove}

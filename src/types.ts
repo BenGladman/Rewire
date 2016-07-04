@@ -7,7 +7,6 @@ export type BoxSide = "top" | "right" | "bottom" | "left";
 
 export interface BoxDefinition {
     key?: string;
-    title?: string;
     x: number;
     y: number;
     width: number;

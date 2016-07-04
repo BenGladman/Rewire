@@ -10,13 +10,3 @@
 .rw-Box.is-active {
     border: 1px solid var(--rw-activeColor);
 }
-
-.rw-Box-header {
-    background: var(--rw-baseDarkColor);
-    color: var(--rw-baseLightColor);
-    font-size: 0.6rem;
-    font-weight: normal;
-    margin: 0;
-    padding: 2px 0;
-    text-align: center;
-}
