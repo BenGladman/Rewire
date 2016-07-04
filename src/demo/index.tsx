@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as Types from "./types";
-import Rewire from "./components/Rewire";
-import { squareJackType, arrowJackType } from "./components/JackType";
+import { BoxDefinition, WireDefinition } from "../types";
+import Rewire from "../components/Rewire";
+import { squareJackType, arrowJackType } from "../components/JackType";
 
-const initialBoxes: Types.BoxDefinition[] = [
+const initialBoxes: BoxDefinition[] = [
     {
-        title: "Title A", x: 50, y: 50, width: 100, height: 100,
+        x: 50, y: 50, width: 100, height: 100,
         content: <div>Box A</div>,
         sockets: [
             { side: "right", pos: 0.2, type: arrowJackType },
@@ -26,7 +26,7 @@ const initialBoxes: Types.BoxDefinition[] = [
     }
 ];
 
-const initialWires: Types.WireDefinition[] = [
+const initialWires: WireDefinition[] = [
     {
         jack1: { socket: initialBoxes[0].sockets[0], type: arrowJackType },
         jack2: { socket: initialBoxes[1].sockets[0], type: arrowJackType },
@@ -42,11 +42,10 @@ const initialWires: Types.WireDefinition[] = [
 ];
 
 const initData = {
-    heading: "myHeading",
     height: 600,
     width: 600,
     initialBoxes,
     initialWires,
 };
 
-ReactDOM.render(<Rewire {...initData} />, document.getElementById("RwApp"));
+ReactDOM.render(<Rewire {...initData} />, document.getElementById("rw-App"));

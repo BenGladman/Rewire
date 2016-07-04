@@ -25,7 +25,7 @@ const tsxloaders = [
 ];
 
 module.exports = {
-    entry: "./src/app.tsx",
+    entry: "./src/demo",
     output: {
         path: "./dist",
         filename: "bundle.js"
