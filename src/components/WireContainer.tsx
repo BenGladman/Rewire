@@ -1,13 +1,13 @@
 import * as React from "react";
-import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
-import Wire from "../Wire";
-import Jack from "../Jack";
-import Socket from "../Socket";
-import addWire from "../../actions/addWire";
-import moveJack from "../../actions/moveJack";
-import setMouseMove from "../../actions/setMouseMove";
-import setMovingItem from "../../actions/setMovingItem";
-import "./index.css";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../types";
+import Wire from "./Wire";
+import Jack from "./Jack";
+import Socket from "./Socket";
+import addWire from "../actions/addWire";
+import moveJack from "../actions/moveJack";
+import setMouseMove from "../actions/setMouseMove";
+import setMovingItem from "../actions/setMovingItem";
+import "./WireContainer.css";
 
 interface WireContainerProps {
     wires: Set<WireDefinition>;

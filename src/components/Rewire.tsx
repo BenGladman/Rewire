@@ -1,12 +1,12 @@
 import * as React from "react";
-import * as Types from "../../types";
-import { initialiseStore } from "../../store";
-import BoxContainer from "../BoxContainer";
-import WireContainer from "../WireContainer";
-import clearAll from "../../actions/clearAll";
-import nextKey from "../../util/nextKey";
-import { mod } from "../../util/mathUtil";
-import "./index.css";
+import * as Types from "../types";
+import { initialiseStore } from "../store";
+import BoxContainer from "./BoxContainer";
+import WireContainer from "./WireContainer";
+import clearAll from "../actions/clearAll";
+import nextKey from "../util/nextKey";
+import { mod } from "../util/mathUtil";
+import "./Rewire.css";
 
 interface RewireProps {
     height: number;

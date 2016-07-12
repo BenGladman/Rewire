@@ -1,5 +1,5 @@
-import * as Types from "../../types";
-import "./index.css";
+import * as Types from "../types";
+import "./Socket.css";
 
 interface SocketProps {
     key: string;

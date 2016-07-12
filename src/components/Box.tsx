@@ -1,11 +1,11 @@
 import * as React from "react";
-import { BoxDefinition } from "../../types";
-import moveBox from "../../actions/moveBox";
-import setActiveBox from "../../actions/setActiveBox";
-import setMouseMove from "../../actions/setMouseMove";
-import setTouchMove from "../../actions/setTouchMove";
-import setMovingItem from "../../actions/setMovingItem";
-import "./index.css";
+import { BoxDefinition } from "../types";
+import moveBox from "../actions/moveBox";
+import setActiveBox from "../actions/setActiveBox";
+import setMouseMove from "../actions/setMouseMove";
+import setTouchMove from "../actions/setTouchMove";
+import setMovingItem from "../actions/setMovingItem";
+import "./Box.css";
 
 interface BoxProps {
     key: string;

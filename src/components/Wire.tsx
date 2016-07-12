@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
-import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
-import setActiveWire from "../../actions/setActiveWire";
-import "./index.css";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../types";
+import setActiveWire from "../actions/setActiveWire";
+import "./Wire.css";
 
 const deg2rad = Math.PI / 180;
 

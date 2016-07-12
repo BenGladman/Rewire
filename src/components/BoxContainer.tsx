@@ -1,7 +1,7 @@
 import * as React from "react";
-import { BoxDefinition, JackDefinition } from "../../types";
-import Box from "../Box";
-import "./index.css";
+import { BoxDefinition, JackDefinition } from "../types";
+import Box from "./Box";
+import "./BoxContainer.css";
 
 interface BoxContainerProps {
     boxes: Set<BoxDefinition>;

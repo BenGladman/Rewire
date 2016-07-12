@@ -1,4 +1,4 @@
-@import "../../base.css";
+@import "../base.css";
 
 .rw-Socket {
     fill: var(--rw-baseColor);

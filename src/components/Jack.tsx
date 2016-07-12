@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
-import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
-import moveJack from "../../actions/moveJack";
-import setMouseMove from "../../actions/setMouseMove";
-import setActiveWire from "../../actions/setActiveWire";
-import setActiveJack from "../../actions/setActiveJack";
-import setMovingItem from "../../actions/setMovingItem";
-import "./index.css";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../types";
+import moveJack from "../actions/moveJack";
+import setMouseMove from "../actions/setMouseMove";
+import setActiveWire from "../actions/setActiveWire";
+import setActiveJack from "../actions/setActiveJack";
+import setMovingItem from "../actions/setMovingItem";
+import "./Jack.css";
 
 interface JackProps {
     key: string;
