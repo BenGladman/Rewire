@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BoxDefinition, WireDefinition, JackDefinition, mouseHandler } from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
 import Wire from "../Wire";
 import Jack from "../Jack";
 import Socket from "../Socket";
@@ -18,7 +18,7 @@ interface WireContainerProps {
 }
 
 export default function WireContainer({ wires, boxes, activeWire, activeJack, movingItem }: WireContainerProps) {
-    const onMouseDown: mouseHandler = (ev) => {
+    const onMouseDown: React.MouseEventHandler = (ev) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
             const bounds = target.getBoundingClientRect();
@@ -27,7 +27,7 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, mo
 
             let addedWire: WireDefinition = null;
 
-            const onMouseMove: mouseHandler = (ev) => {
+            const onMouseMove: React.MouseEventHandler = (ev) => {
                 const x2 = ev.clientX - bounds.left;
                 const y2 = ev.clientY - bounds.top;
 
@@ -42,7 +42,7 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, mo
                 }
             };
 
-            const onMouseUp: mouseHandler = (ev) => {
+            const onMouseUp: React.MouseEventHandler = (ev) => {
                 setMovingItem(null, null, null);
             };
 

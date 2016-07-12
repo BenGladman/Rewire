@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Motion, spring } from "react-motion";
-import { BoxDefinition, WireDefinition, JackDefinition, mouseHandler } from "../../types";
+import { BoxDefinition, WireDefinition, JackDefinition } from "../../types";
 import setActiveWire from "../../actions/setActiveWire";
 import "./index.css";
 
@@ -15,11 +15,11 @@ interface WireProps {
 }
 
 export default function Wire({ wire, straightness = 100, isActive, movingItem }: WireProps) {
-    const onMouseEnter: mouseHandler = (ev) => {
+    const onMouseEnter: React.MouseEventHandler = (ev) => {
         if (!movingItem) { setActiveWire(wire); }
     };
 
-    const onMouseLeave: mouseHandler = (ev) => {
+    const onMouseLeave: React.MouseEventHandler = (ev) => {
         if (!movingItem) { setActiveWire(null); }
     };
 

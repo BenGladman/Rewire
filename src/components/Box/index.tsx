@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BoxDefinition, mouseHandler, touchHandler } from "../../types";
+import { BoxDefinition } from "../../types";
 import moveBox from "../../actions/moveBox";
 import setActiveBox from "../../actions/setActiveBox";
 import setMouseMove from "../../actions/setMouseMove";
@@ -15,21 +15,21 @@ interface BoxProps {
 }
 
 export default function Box({ box, isActive, movingBox }: BoxProps) {
-    const onMouseEnter: mouseHandler = (ev) => {
+    const onMouseEnter: React.MouseEventHandler = (ev) => {
         if (!movingBox) { setActiveBox(box); }
     };
 
-    const onMouseLeave: mouseHandler = (ev) => {
+    const onMouseLeave: React.MouseEventHandler = (ev) => {
         if (!movingBox) { setActiveBox(null); }
     };
 
-    const onMouseDown: mouseHandler = (ev) => {
+    const onMouseDown: React.MouseEventHandler = (ev) => {
         const offsetX = box.x - ev.pageX;
         const offsetY = box.y - ev.pageY;
-        const onMouseMove: mouseHandler = (ev) => {
+        const onMouseMove: React.MouseEventHandler = (ev) => {
             moveBox(box, ev.pageX + offsetX, ev.pageY + offsetY);
         };
-        const onMouseUp: mouseHandler = (ev) => {
+        const onMouseUp: React.MouseEventHandler = (ev) => {
             setMovingItem(null, null, null);
         };
         setMovingItem(box, null, null);
@@ -41,17 +41,17 @@ export default function Box({ box, isActive, movingBox }: BoxProps) {
         ev.preventDefault();
     };
 
-    const onTouchStart: touchHandler = (ev) => {
+    const onTouchStart: React.TouchEventHandler = (ev) => {
         const touch = ev.touches[0];
         if (!touch) { return; }
         const offsetX = box.x - touch.pageX;
         const offsetY = box.y - touch.pageY;
-        const onTouchMove: touchHandler = (ev) => {
+        const onTouchMove: React.TouchEventHandler = (ev) => {
             const touch = ev.touches[0];
             if (!touch) { return; }
             moveBox(box, touch.pageX + offsetX, touch.pageY + offsetY);
         };
-        const onTouchEnd: touchHandler = (ev) => {
+        const onTouchEnd: React.TouchEventHandler = (ev) => {
             setMovingItem(null, null, null);
         };
         setMovingItem(box, null, null);

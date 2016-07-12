@@ -1,14 +1,14 @@
-import { mouseHandler } from "../Types";
+import * as React from "react";
 import { setState } from "../store";
 
-export default function setMouseMove(moveFunc: mouseHandler, upFunc?: mouseHandler) {
-    const upFunc2: mouseHandler = (ev) => {
+export default function setMouseMove(moveFunc: React.MouseEventHandler, upFunc?: React.MouseEventHandler) {
+    const upFunc2: React.MouseEventHandler = (ev) => {
         if (upFunc) { upFunc(ev); }
         setState({ onMouseMove: null, onMouseUp: null });
         return;
     };
 
-    const moveFunc2: mouseHandler = (ev) => {
+    const moveFunc2: React.MouseEventHandler = (ev) => {
         if (!(ev.buttons & 1)) {
             // left button released
             upFunc2(ev);
