@@ -59,8 +59,6 @@ export default function Box({ box, isActive, movingBox }: BoxProps) {
 
         // don't trigger on container
         ev.stopPropagation();
-        // prevent text selection
-        ev.preventDefault();
     };
 
     return (
