@@ -6,7 +6,8 @@ const postcssImport = require("postcss-import");
 const postcssCustomProperties = require("postcss-custom-properties");
 const postcssColorFunction = require("postcss-color-function");
 
-const includePath = [path.resolve(__dirname, "src")];
+const srcPath = path.resolve(__dirname, "src");
+const distPath = path.resolve(__dirname, "dist");
 
 const tsloaders = [
     "babel-loader?" + JSON.stringify({
@@ -25,10 +26,11 @@ const tsxloaders = [
 ];
 
 module.exports = {
-    entry: "./src/demo",
+    entry: ["./src/demo"],
     output: {
-        path: "./dist",
-        filename: "bundle.js"
+        path: distPath,
+        publicPath: "/dist/",
+        filename: "bundle.js",
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -43,17 +45,17 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loaders: tsloaders,
-                include: includePath
+                include: [srcPath]
             },
             {
                 test: /\.tsx$/,
                 loaders: tsxloaders,
-                include: includePath
+                include: [srcPath]
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!postcss-loader"),
-                include: includePath
+                include: [srcPath]
             }
         ],
 
@@ -77,8 +79,8 @@ module.exports = {
     ],
 
     externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+        // "react": "React",
+        // "react-dom": "ReactDOM"
     },
 
     debug: true,

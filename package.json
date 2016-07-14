@@ -4,7 +4,8 @@
   "private": true,
   "description": "Boxes and Arrows",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node devserver.js"
   },
   "author": "Ben Gladman",
   "license": "ISC",
@@ -27,10 +28,12 @@
     "postcss-custom-properties": "^5.0.1",
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.9.1",
+    "react-hot-loader": "^1.3.0",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "typescript": "^1.8.10",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
