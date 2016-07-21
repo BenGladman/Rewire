@@ -4,6 +4,8 @@
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
+    -ms-touch-action: none;
+        touch-action: none;
 }
 
 .rw-Box.is-active {

@@ -1,6 +1,0 @@
-@import "../../base.css";
-
-.rw-Socket {
-    fill: var(--rw-baseColor);
-    stroke-width: 0;
-}
