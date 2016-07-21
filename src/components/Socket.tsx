@@ -1,12 +1,15 @@
-import * as Types from "../types";
+import * as React from "react";
+import { SocketDefinition } from "../types";
 import "./Socket.css";
 
-interface SocketProps {
+interface Props {
     key: string;
-    socket: Types.SocketDefinition;
+    socket: SocketDefinition;
 }
 
-export default function Socket({socket}: SocketProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ socket }) => {
     return socket.type({
         x: socket.x,
         y: socket.y,
@@ -17,3 +20,6 @@ export default function Socket({socket}: SocketProps) {
         }
     });
 };
+
+component.displayName = "Socket";
+export default component;

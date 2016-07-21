@@ -6,7 +6,7 @@ import "./Wire.css";
 
 const deg2rad = Math.PI / 180;
 
-interface WireProps {
+interface Props {
     key: string;
     wire: WireDefinition;
     straightness?: number;
@@ -14,7 +14,9 @@ interface WireProps {
     movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function Wire({ wire, straightness = 100, isActive, movingItem }: WireProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ wire, straightness = 100, isActive, movingItem }) => {
     const onMouseEnter: React.MouseEventHandler = (ev) => {
         if (!movingItem) { setActiveWire(wire); }
     };
@@ -67,4 +69,7 @@ export default function Wire({ wire, straightness = 100, isActive, movingItem }:
     } else {
         return afunc({ x1, y1, angle1, x2, y2, angle2 });
     }
-}
+};
+
+component.displayName = "Wire";
+export default component;

@@ -3,13 +3,15 @@ import { BoxDefinition, JackDefinition } from "../types";
 import Box from "./Box";
 import "./BoxContainer.css";
 
-interface BoxContainerProps {
+interface Props {
     boxes: Set<BoxDefinition>;
     activeBox: BoxDefinition;
     movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function BoxContainer({ boxes, activeBox, movingItem }: BoxContainerProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ boxes, activeBox, movingItem }) => {
     const boxEls: JSX.Element[] = [];
     const movingBox = boxes.has(movingItem as BoxDefinition);
 
@@ -22,4 +24,7 @@ export default function BoxContainer({ boxes, activeBox, movingItem }: BoxContai
             {boxEls}
         </div>
     );
-}
+};
+
+component.displayName = "BoxContainer";
+export default component;

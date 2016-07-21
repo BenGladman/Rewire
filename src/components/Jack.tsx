@@ -8,7 +8,7 @@ import setActiveJack from "../actions/setActiveJack";
 import setMovingItem from "../actions/setMovingItem";
 import "./Jack.css";
 
-interface JackProps {
+interface Props {
     key: string;
     jack: JackDefinition;
     wire: WireDefinition;
@@ -16,7 +16,9 @@ interface JackProps {
     movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function Jack({ jack, wire, isActive, movingItem }: JackProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ jack, wire, isActive, movingItem }) => {
     const onMouseEnter: React.MouseEventHandler = (ev) => {
         if (!movingItem) {
             setActiveJack(jack);
@@ -83,3 +85,6 @@ export default function Jack({ jack, wire, isActive, movingItem }: JackProps) {
         return afunc(jack);
     }
 };
+
+component.displayName = "Jack";
+export default component;

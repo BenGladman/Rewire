@@ -9,7 +9,7 @@ import setMouseMove from "../actions/setMouseMove";
 import setMovingItem from "../actions/setMovingItem";
 import "./WireContainer.css";
 
-interface WireContainerProps {
+interface Props {
     wires: Set<WireDefinition>;
     boxes: Set<BoxDefinition>;
     activeWire: WireDefinition;
@@ -17,7 +17,9 @@ interface WireContainerProps {
     movingItem: BoxDefinition | JackDefinition;
 }
 
-export default function WireContainer({ wires, boxes, activeWire, activeJack, movingItem }: WireContainerProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ wires, boxes, activeWire, activeJack, movingItem }) => {
     const onMouseDown: React.MouseEventHandler = (ev) => {
         const target = ev.currentTarget;
         if (target instanceof SVGSVGElement) {
@@ -79,3 +81,6 @@ export default function WireContainer({ wires, boxes, activeWire, activeJack, mo
         </svg>
     );
 };
+
+component.displayName = "WireContainer";
+export default component;

@@ -7,14 +7,16 @@ import setTouchMove from "../actions/setTouchMove";
 import setMovingItem from "../actions/setMovingItem";
 import "./Box.css";
 
-interface BoxProps {
+interface Props {
     key: string;
     box: BoxDefinition;
     isActive: boolean;
     movingBox: boolean;
 }
 
-export default function Box({ box, isActive, movingBox }: BoxProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ box, isActive, movingBox }) => {
     const onMouseEnter: React.MouseEventHandler = (ev) => {
         if (!movingBox) { setActiveBox(box); }
     };
@@ -71,4 +73,7 @@ export default function Box({ box, isActive, movingBox }: BoxProps) {
             {box.content}
         </div>
     );
-}
+};
+
+component.displayName = "Box";
+export default component;

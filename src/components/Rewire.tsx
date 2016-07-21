@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Types from "../types";
+import { BoxDefinition, WireDefinition, SocketDefinition, JackDefinition, State } from "../types";
 import { initialiseStore } from "../store";
 import BoxContainer from "./BoxContainer";
 import WireContainer from "./WireContainer";
@@ -8,15 +8,15 @@ import nextKey from "../util/nextKey";
 import { mod } from "../util/mathUtil";
 import "./Rewire.css";
 
-interface RewireProps {
+interface Props {
     height: number;
     width: number;
-    initialBoxes?: Types.BoxDefinition[];
-    initialWires?: Types.WireDefinition[];
+    initialBoxes?: BoxDefinition[];
+    initialWires?: WireDefinition[];
 }
 
-export default class Rewire extends React.Component<RewireProps, Types.State> {
-    constructor(props: RewireProps) {
+export default class Rewire extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         const { width, height } = props;
@@ -58,12 +58,12 @@ export default class Rewire extends React.Component<RewireProps, Types.State> {
     }
 }
 
-const initBox = (box: Types.BoxDefinition) => {
+const initBox = (box: BoxDefinition) => {
     if (!box.key) { box.key = nextKey(); }
     box.sockets.forEach((socket) => initSocket(box, socket));
 };
 
-const initSocket = (box: Types.BoxDefinition, socket: Types.SocketDefinition) => {
+const initSocket = (box: BoxDefinition, socket: SocketDefinition) => {
     if (!socket.key) { socket.key = nextKey(); }
 
     const pos = socket.pos ? socket.pos + 0.5 : 0.5;
@@ -92,14 +92,14 @@ const initSocket = (box: Types.BoxDefinition, socket: Types.SocketDefinition) =>
     }
 };
 
-const initWire = (wire: Types.WireDefinition) => {
+const initWire = (wire: WireDefinition) => {
     if (!wire.key) { wire.key = nextKey(); }
 
     initJack(wire.jack1);
     initJack(wire.jack2);
 };
 
-const initJack = (jack: Types.JackDefinition) => {
+const initJack = (jack: JackDefinition) => {
     if (!jack.key) { jack.key = nextKey(); }
 
     if (jack.socket) {

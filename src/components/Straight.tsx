@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface StraightProps {
+interface Props {
     key: string;
     x1: number;
     y1: number;
@@ -8,10 +8,15 @@ interface StraightProps {
     y2: number;
 }
 
-export default function Straight({x1, y1, x2, y2}: StraightProps) {
+type Component = React.StatelessComponent<Props>;
+
+const component: Component = ({ x1, y1, x2, y2 }) => {
     return (
         <line className="rw-Wire"
             x1={x1} y1={y1}
             x2={x2} y2={y2} />
     );
-}
+};
+
+component.displayName = "Straight";
+export default component;
